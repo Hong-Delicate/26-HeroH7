@@ -17,5 +17,4 @@ version: "2.1"
 options:
     26_HeroH7:
         files: {}
-        virtualPathFiles:
-            <virtual_root>/Middlewares/FreeRTOS/cmsis_os2.c: ""
+        virtualPathFiles: {}

@@ -6,7 +6,9 @@
     ],
     "settings": {
         "files.associations": {
-            "chassis_task.h": "c"
+            "bsp_fdcan.h": "c",
+            "cmsis_os.h": "c",
+            "fdcan.h": "c"
         }
     },
     "extensions": {}
