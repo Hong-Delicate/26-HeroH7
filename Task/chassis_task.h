@@ -3,7 +3,7 @@
 #include "main.h"
 
 #define CHASSIS_TASK_INIT_TIME 200
-#define CHASSIS_CONTROL_TIME_MS 5000
+#define CHASSIS_CONTROL_TIME_MS 10
 
 #ifdef __cplusplus
  extern "C" {

@@ -8,7 +8,8 @@
         "files.associations": {
             "bsp_fdcan.h": "c",
             "cmsis_os.h": "c",
-            "fdcan.h": "c"
+            "fdcan.h": "c",
+            "chassis_task.h": "c"
         }
     },
     "extensions": {}
