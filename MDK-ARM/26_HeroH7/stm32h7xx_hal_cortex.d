@@ -24,6 +24,7 @@
 26_heroh7\stm32h7xx_hal_cortex.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h
 26_heroh7\stm32h7xx_hal_cortex.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h
 26_heroh7\stm32h7xx_hal_cortex.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h
+26_heroh7\stm32h7xx_hal_cortex.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_fdcan.h
 26_heroh7\stm32h7xx_hal_cortex.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h
 26_heroh7\stm32h7xx_hal_cortex.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h
 26_heroh7\stm32h7xx_hal_cortex.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h

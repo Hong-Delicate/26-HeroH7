@@ -25,6 +25,7 @@
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h
+26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_fdcan.h
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h
@@ -36,4 +37,8 @@
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 26_heroh7\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+26_heroh7\stm32h7xx_it.o: ../Bsp/bsp_beep.h
+26_heroh7\stm32h7xx_it.o: ../Core/Inc/main.h
+26_heroh7\stm32h7xx_it.o: ../Bsp/bsp_fdcan.h
+26_heroh7\stm32h7xx_it.o: ../Core/Inc/fdcan.h
 26_heroh7\stm32h7xx_it.o: ../Core/Inc/stm32h7xx_it.h

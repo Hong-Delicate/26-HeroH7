@@ -31,6 +31,11 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "bsp_beep.h"
+#include "bsp_fdcan.h"
+
+#include "Djimotor.h"
+#include "dm_motor_drv.h"
 
 /* USER CODE END Includes */
 

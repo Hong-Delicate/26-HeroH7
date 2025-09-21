@@ -9,7 +9,9 @@
             "bsp_fdcan.h": "c",
             "cmsis_os.h": "c",
             "fdcan.h": "c",
-            "chassis_task.h": "c"
+            "chassis_task.h": "c",
+            "main.h": "c",
+            "dm_motor_drv.h": "c"
         }
     },
     "extensions": {}

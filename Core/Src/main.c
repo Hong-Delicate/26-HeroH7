@@ -27,8 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "bsp_beep.h"
-#include "bsp_fdcan.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

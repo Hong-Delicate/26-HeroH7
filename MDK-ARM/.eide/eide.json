@@ -3,7 +3,8 @@
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [
-    "../Task"
+    "../Task",
+    "../Modules"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -583,7 +584,8 @@
           "../Bsp",
           "../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
           ".cmsis/include",
-          "RTE/_26_HeroH7"
+          "RTE/_26_HeroH7",
+          "../Modules"
         ],
         "libList": [],
         "defineList": [

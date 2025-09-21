@@ -1,5 +1,8 @@
 #include "bsp_fdcan.h"
 
+uint8_t rx_data[3][8] = {0};
+uint16_t rx_id[3];
+
 /**
 ************************************************************************
 * @brief:      	bsp_can_init(void)
@@ -202,4 +205,63 @@ uint8_t fdcanx_receive(hcan_t *hfdcan, uint16_t *rec_id, uint8_t *buf)
 		return len;//接收数据
 	}
 	return 0;	
+}
+
+/**
+************************************************************************
+* @brief:      	fdcan1_rx_callback(void)
+* @param:       void
+* @retval:     	void
+* @details:    	CAN1接收回调
+************************************************************************
+**/
+void fdcan1_rx_callback(void)
+{
+	fdcanx_receive(&hfdcan1, &rx_id[0],(uint8_t *)rx_data[0]);
+	if(rx_id[0] == 0x201)	/* 0x201 ~ 0x204*/
+	{
+		CAN_M3508[0].angle=(rx_data[0][0]<<8)+rx_data[0][1];
+		CAN_M3508[0].speed=(rx_data[0][2]<<8)+rx_data[0][3];
+		CAN_M3508[0].current=(rx_data[0][4]<<8)+rx_data[0][5];
+		CAN_M3508[0].temperature=(rx_data[0][6]<<8);
+	}
+}
+
+void fdcan2_rx_callback(void){}
+void fdcan3_rx_callback(void){}
+
+
+void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
+{
+	if((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != RESET)
+	{	 
+		if(hfdcan == &hfdcan1)
+		{
+			fdcan1_rx_callback();
+		}else	if(hfdcan == &hfdcan2)
+		{
+			fdcan2_rx_callback();
+		}else	if(hfdcan == &hfdcan3)
+		{
+			fdcan3_rx_callback();
+		}
+	}
+}
+
+  
+void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
+{
+	if((RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) != RESET)
+	{
+		if(hfdcan == &hfdcan1)
+		{
+			fdcan1_rx_callback();
+		}else	if(hfdcan == &hfdcan2)
+		{
+			fdcan2_rx_callback();
+		}else	if(hfdcan == &hfdcan3)
+		{
+			fdcan3_rx_callback();
+		}
+	}
 }

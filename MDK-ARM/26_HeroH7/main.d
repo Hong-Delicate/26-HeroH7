@@ -25,6 +25,7 @@
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h
+26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_fdcan.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h
@@ -36,7 +37,11 @@
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
-26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+26_heroh7\main.o: ../Bsp/bsp_beep.h
+26_heroh7\main.o: ../Core/Inc/main.h
+26_heroh7\main.o: ../Bsp/bsp_fdcan.h
+26_heroh7\main.o: ../Core/Inc/fdcan.h
+26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 26_heroh7\main.o: ../Core/Inc/FreeRTOSConfig.h
 26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
@@ -46,12 +51,8 @@
 26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
-26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
-26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
-26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
-26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 26_heroh7\main.o: ../Core/Inc/dma.h
 26_heroh7\main.o: ../Core/Inc/tim.h
 26_heroh7\main.o: ../Core/Inc/usart.h
 26_heroh7\main.o: ../Core/Inc/gpio.h
-26_heroh7\main.o: ../Bsp/bsp_beep.h
