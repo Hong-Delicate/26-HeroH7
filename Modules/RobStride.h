@@ -32,6 +32,8 @@
 #define Communication_Type_SetSingleParameter 0x12	//设定单个参数
 #define Communication_Type_ErrorFeedback 0x15				//故障反馈帧
 
+#ifdef __cplusplus
+
 class data_read_write_one
 {
 	public:
@@ -125,6 +127,6 @@ void SearchMotor(FDCAN_HandleTypeDef *hfdcan,uint8_t CAN_ID);
 extern RobStrite_Motor RobStrite03[];
 
 
-
+#endif
 
 #endif

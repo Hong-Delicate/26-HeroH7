@@ -1,6 +1,10 @@
 #include "dm_motor_drv.h"
 #include "fdcan.h"
 
+#define KP_MIN 0.0f
+#define KP_MAX 500.0f
+#define KD_MIN 0.0f
+#define KD_MAX 5.0f
 
 /**
 ************************************************************************
@@ -168,7 +172,7 @@ void dm_motor_fbdata(motor_t *motor, uint8_t *rx_data)
 * @details:    	将给定的浮点数 x 在指定范围 [x_min, x_max] 内进行线性映射，映射结果为一个指定位数的无符号整数
 ************************************************************************
 **/
-int float_to_uint(float x_float, float x_min, float x_max, int bits)
+static int float_to_uint(float x_float, float x_min, float x_max, int bits)
 {
 	/* Converts a float to an unsigned int, given range and number of bits */
 	float span = x_max - x_min;
@@ -186,7 +190,7 @@ int float_to_uint(float x_float, float x_min, float x_max, int bits)
 * @details:    	将给定的无符号整数 x_int 在指定范围 [x_min, x_max] 内进行线性映射，映射结果为一个浮点数
 ************************************************************************
 **/
-float uint_to_float(int x_int, float x_min, float x_max, int bits)
+static float uint_to_float(int x_int, float x_min, float x_max, int bits)
 {
 	/* converts unsigned int to float, given range and number of bits */
 	float span = x_max - x_min;
@@ -502,3 +506,7 @@ void save_motor_data(uint16_t id, uint8_t rid)
 	fdcanx_send_data(&hfdcan1, 0x7FF, data, 4);
 }
 
+#undef KP_MIN
+#undef KP_MAX
+#undef KD_MIN
+#undef KD_MAX

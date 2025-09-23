@@ -4,16 +4,10 @@
 #include "fdcan.h"
 #include "bsp_fdcan.h"
 
-
 #define MIT_MODE 			0x000
 #define POS_MODE			0x100
 #define SPD_MODE			0x200
 #define PSI_MODE		  	0x300
-
-#define KP_MIN 0.0f
-#define KP_MAX 500.0f
-#define KD_MIN 0.0f
-#define KD_MAX 5.0f
 
 typedef enum
 {
@@ -185,8 +179,8 @@ typedef struct
 
 #define hcan_t FDCAN_HandleTypeDef
 
-float uint_to_float(int x_int, float x_min, float x_max, int bits);
-int float_to_uint(float x_float, float x_min, float x_max, int bits);
+static float uint_to_float(int x_int, float x_min, float x_max, int bits);
+static int float_to_uint(float x_float, float x_min, float x_max, int bits);
 void dm_motor_ctrl_send(hcan_t* hcan, motor_t *motor);
 void dm_motor_enable(hcan_t* hcan, motor_t *motor);
 void dm_motor_disable(hcan_t* hcan, motor_t *motor);

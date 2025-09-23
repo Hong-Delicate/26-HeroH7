@@ -6,9 +6,9 @@
  #define V_MIN -20.0f 
  #define V_MAX 20.0f
  #define KP_MIN 0.0f
-//  #define KP_MAX 5000.0f
+ #define KP_MAX 5000.0f
  #define KD_MIN 0.0f
-//  #define KD_MAX 100.0f
+ #define KD_MAX 100.0f
  #define T_MIN -60.0f
  #define T_MAX 60.0f
 
@@ -61,7 +61,7 @@ RobStrite_Motor::RobStrite_Motor(float (*Offset_MotoFunc)(float Motor_Tar) , uin
 * @返回值 			: 十进制的float型浮点数
 * @概述  				: None
 *******************************************************************************/
-float uint16_to_float(uint16_t x,float x_min,float x_max,int bits){
+static float uint16_to_float(uint16_t x,float x_min,float x_max,int bits){
     uint32_t span = (1 << bits) - 1;
     float offset = x_max - x_min;
     return offset * x / span + x_min;
@@ -75,7 +75,7 @@ float uint16_to_float(uint16_t x,float x_min,float x_max,int bits){
 * @返回值 			: 十进制的int型整数
 * @概述  				: None
 *******************************************************************************/
-int float_to_uint(float x,float x_min,float x_max,int bits)
+static int float_to_uint(float x,float x_min,float x_max,int bits)
 {
 	float span = x_max - x_min;
 	float offset = x_min;
@@ -93,7 +93,7 @@ float Byte_to_float(uint8_t* bytedata)
 {  
 	uint32_t data = bytedata[7]<<24|bytedata[6]<<16|bytedata[5]<<8|bytedata[4];
 	float data_float = *(float*)(&data);
-  return data_float;  
+  	return data_float;  
 }  
 //int count_num = 0 ;
 /*******************************************************************************
@@ -194,10 +194,10 @@ void RobStrite_Motor::RobStrite_Get_CAN_ID()
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	
 	TxMessage.Identifier = Communication_Type_Get_ID<<24|Master_CAN_ID <<8|CAN_ID;
   //HAL_CAN_AddTxMessage(hfdcan, &TxMessage, txdata, &Mailbox); // 发送CAN消息
@@ -212,10 +212,10 @@ void SearchMotor(FDCAN_HandleTypeDef *hfdcan,uint8_t CAN_ID)
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_Get_ID<<24|0x1f <<8|CAN_ID;
   //HAL_CAN_AddTxMessage(hfdcan, &TxMessage, txdata, &Mailbox); // 发送CAN消息
 	HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);
@@ -250,10 +250,10 @@ void RobStrite_Motor::RobStrite_Motor_move_control(float Torque, float Angle, fl
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_OFF;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_OFF;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	
 	TxMessage.Identifier = Communication_Type_MotionControl<<24|float_to_uint(Motor_Set_All.set_Torque,T_MIN,T_MAX,16)<<8|CAN_ID;
 	txdata[0] = float_to_uint(Motor_Set_All.set_angle, P_MIN,P_MAX, 16)>>8; 
@@ -309,7 +309,7 @@ void RobStrite_Motor::RobStrite_Motor_Speed_control(float Speed,float accelerati
 	Set_RobStrite_Motor_parameter(0X7005, Speed_control_mode, Set_mode);		//设置电机模式
 	count_set_motor_mode_Speed++;
 	Set_RobStrite_Motor_parameter(0X7018, Motor_Set_All.set_limit_cur, Set_parameter);
-  Set_RobStrite_Motor_parameter(0X7022, Motor_Set_All.set_acceleration, Set_parameter);	
+  	Set_RobStrite_Motor_parameter(0X7022, Motor_Set_All.set_acceleration, Set_parameter);	
 	Set_RobStrite_Motor_parameter(0X700A, Motor_Set_All.set_speed, Set_parameter);
 }
 /*******************************************************************************
@@ -358,13 +358,13 @@ void RobStrite_Motor::Enable_Motor()
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	
 	TxMessage.Identifier = Communication_Type_MotorEnable<<24|Master_CAN_ID<<8|CAN_ID;
-  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // 发送CAN消息
+  	HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // 发送CAN消息
 }
 /*******************************************************************************
 * @功能     		: RobStrite电机失能 （通信类型4）
@@ -382,14 +382,14 @@ void RobStrite_Motor::Disenable_Motor(uint8_t clear_error)
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	
 	TxMessage.Identifier = Communication_Type_MotorStop<<24|Master_CAN_ID<<8|CAN_ID;
 	
-  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // 发送CAN消息
+ 	 HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // 发送CAN消息
 }
 /*******************************************************************************
 * @功能     		: RobStrite电机写入参数 （通信类型18）
@@ -407,10 +407,10 @@ void RobStrite_Motor::Set_RobStrite_Motor_parameter(uint16_t Index, float Value,
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	
 	TxMessage.Identifier = Communication_Type_SetSingleParameter<<24|Master_CAN_ID<<8|CAN_ID;
 	txdata[0] = Index;
@@ -447,10 +447,10 @@ void RobStrite_Motor::Get_RobStrite_Motor_parameter(uint16_t Index)
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_GetSingleParameter<<24|Master_CAN_ID<<8|CAN_ID;
   HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// 发送CAN消息
 }
@@ -469,10 +469,10 @@ void RobStrite_Motor::Set_CAN_ID(uint8_t Set_CAN_ID)
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_Can_ID<<24|Set_CAN_ID<<16|Master_CAN_ID<<8|CAN_ID;
   HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// 发送CAN消息
 }
@@ -491,10 +491,10 @@ void RobStrite_Motor::Set_ZeroPos()
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
 	TxMessage.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
-  TxMessage.BitRateSwitch=FDCAN_BRS_ON;
-  TxMessage.FDFormat=FDCAN_FD_CAN;
-  TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
-  TxMessage.MessageMarker=0;
+	TxMessage.BitRateSwitch=FDCAN_BRS_ON;
+	TxMessage.FDFormat=FDCAN_FD_CAN;
+	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
+	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_SetPosZero<<24|Master_CAN_ID<<8|CAN_ID;
 	txdata[0] = 1;
   HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// 发送CAN消息
@@ -525,3 +525,15 @@ data_read_write::data_read_write(const uint16_t *index_list)
 	VBUS.index = index_list[13];	
 	rotation.index = index_list[14];
 }
+
+// 取消所有宏定义
+#undef P_MIN
+#undef P_MAX
+#undef V_MIN
+#undef V_MAX
+#undef KP_MIN
+#undef KP_MAX
+#undef KD_MIN
+#undef KD_MAX
+#undef T_MIN
+#undef T_MAX
