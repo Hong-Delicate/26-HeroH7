@@ -42,3 +42,5 @@
 26_heroh7\bsp_beep.o: ../Bsp/bsp_fdcan.h
 26_heroh7\bsp_beep.o: ../Core/Inc/main.h
 26_heroh7\bsp_beep.o: ../Core/Inc/fdcan.h
+26_heroh7\bsp_beep.o: ..\Modules\Djimotor.h
+26_heroh7\bsp_beep.o: ..\Modules\dm_motor_drv.h

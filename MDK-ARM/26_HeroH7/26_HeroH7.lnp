@@ -44,7 +44,10 @@
 "26_heroh7\port.o"
 "26_heroh7\bsp_beep.o"
 "26_heroh7\bsp_rc.o"
+"26_heroh7\bsp_fdcan.o"
 "26_heroh7\djimotor.o"
+"26_heroh7\dm_motor_drv.o"
+"26_heroh7\robstride.o"
 "26_heroh7\chassis_task.o"
 --strict --scatter "26_HeroH7\26_HeroH7.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

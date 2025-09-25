@@ -786,6 +786,11 @@
               <FileType>1</FileType>
               <FilePath>..\Bsp\bsp_rc.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_fdcan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Bsp\bsp_fdcan.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -795,6 +800,16 @@
               <FileName>Djimotor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Modules\Djimotor.c</FilePath>
+            </File>
+            <File>
+              <FileName>DM_motor_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\DM_motor_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>RobStride.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Modules\RobStride.cpp</FilePath>
             </File>
           </Files>
         </Group>

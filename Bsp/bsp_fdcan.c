@@ -1,8 +1,5 @@
 #include "bsp_fdcan.h"
 
-uint8_t rx_data[3][8] = {0};
-uint16_t rx_id[3];
-
 /**
 ************************************************************************
 * @brief:      	bsp_can_init(void)
@@ -94,7 +91,7 @@ void FDCAN3_Config(void)
 	FDCAN_FilterTypeDef sFilterConfig;
 	/* Configure Rx filter */	
 	sFilterConfig.IdType = FDCAN_STANDARD_ID;//扩展ID不接收
-	sFilterConfig.FilterIndex = 0;
+	sFilterConfig.FilterIndex = 2;
 	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
 	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
 	sFilterConfig.FilterID1 = 0x00000000; // 
@@ -113,10 +110,10 @@ void FDCAN3_Config(void)
 	{
 		Error_Handler();
 	}
-	if (HAL_FDCAN_ActivateNotification(&hfdcan3, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
-	{
-		Error_Handler();
-	}
+	// if (HAL_FDCAN_ActivateNotification(&hfdcan3, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
+	// {
+	// 	Error_Handler();
+	// }
 	/* Start the FDCAN module */
 	if (HAL_FDCAN_Start(&hfdcan3) != HAL_OK)
 	{
@@ -163,7 +160,7 @@ uint8_t fdcanx_send_data(hcan_t *hfdcan, uint16_t id, uint8_t *data, uint32_t le
     pTxHeader.FDFormat=FDCAN_CLASSIC_CAN;
     pTxHeader.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
     pTxHeader.MessageMarker=0;
-  while(HAL_FDCAN_GetTxFifoFreeLevel(hfdcan) == 0); // 等待有发送邮箱可用
+ 	while(HAL_FDCAN_GetTxFifoFreeLevel(hfdcan) == 0); // 等待有发送邮箱可用
 	if(HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &pTxHeader, data)!=HAL_OK) 
 		return 1;//发送
 	return 0;	
@@ -177,6 +174,7 @@ uint8_t fdcanx_send_data(hcan_t *hfdcan, uint16_t id, uint8_t *data, uint32_t le
 * @details:    	接收数据
 ************************************************************************
 **/
+
 uint8_t fdcanx_receive(hcan_t *hfdcan, uint16_t *rec_id, uint8_t *buf)
 {	
 	FDCAN_RxHeaderTypeDef pRxHeader;
@@ -217,18 +215,42 @@ uint8_t fdcanx_receive(hcan_t *hfdcan, uint16_t *rec_id, uint8_t *buf)
 **/
 void fdcan1_rx_callback(void)
 {
-	fdcanx_receive(&hfdcan1, &rx_id[0],(uint8_t *)rx_data[0]);
-	if(rx_id[0] == 0x201)	/* 0x201 ~ 0x204*/
+	uint16_t rec_id;
+	uint8_t rx_data[8];
+	fdcanx_receive(&hfdcan1, &rec_id,(uint8_t *)rx_data);
+	if(rec_id == 0x201)
 	{
-		CAN_M3508[0].angle=(rx_data[0][0]<<8)+rx_data[0][1];
-		CAN_M3508[0].speed=(rx_data[0][2]<<8)+rx_data[0][3];
-		CAN_M3508[0].current=(rx_data[0][4]<<8)+rx_data[0][5];
-		CAN_M3508[0].temperature=(rx_data[0][6]<<8);
+		CAN_M3508[0].angle=(rx_data[0]<<8)+rx_data[1];
+		CAN_M3508[0].speed=(rx_data[2]<<8)+rx_data[3];
+		CAN_M3508[0].current=(rx_data[4]<<8)+rx_data[5];
+		CAN_M3508[0].temperature=(rx_data[6]<<8);
 	}
 }
 
-void fdcan2_rx_callback(void){}
-void fdcan3_rx_callback(void){}
+void fdcan2_rx_callback(void){
+	uint16_t rec_id;
+	uint8_t rx_data[8];
+	fdcanx_receive(&hfdcan2, &rec_id,(uint8_t *)rx_data);
+	if(rec_id == 0x201)
+	{
+		CAN_M3508[0].angle=(rx_data[0]<<8)+rx_data[1];
+		CAN_M3508[0].speed=(rx_data[2]<<8)+rx_data[3];
+		CAN_M3508[0].current=(rx_data[4]<<8)+rx_data[5];
+		CAN_M3508[0].temperature=(rx_data[6]<<8);
+	}
+}
+void fdcan3_rx_callback(void){
+	uint16_t rec_id;
+	uint8_t rx_data[8];
+	fdcanx_receive(&hfdcan3, &rec_id,(uint8_t *)rx_data);
+	if(rec_id == 0x201)
+	{
+		CAN_M3508[0].angle=(rx_data[0]<<8)+rx_data[1];
+		CAN_M3508[0].speed=(rx_data[2]<<8)+rx_data[3];
+		CAN_M3508[0].current=(rx_data[4]<<8)+rx_data[5];
+		CAN_M3508[0].temperature=(rx_data[6]<<8);
+	}
+}
 
 
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
@@ -249,19 +271,19 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 }
 
   
-void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
-{
-	if((RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) != RESET)
-	{
-		if(hfdcan == &hfdcan1)
-		{
-			fdcan1_rx_callback();
-		}else	if(hfdcan == &hfdcan2)
-		{
-			fdcan2_rx_callback();
-		}else	if(hfdcan == &hfdcan3)
-		{
-			fdcan3_rx_callback();
-		}
-	}
-}
+// void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
+// {
+// 	if((RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) != RESET)
+// 	{
+// 		if(hfdcan == &hfdcan1)
+// 		{
+// 			fdcan1_rx_callback();
+// 		}else	if(hfdcan == &hfdcan2)
+// 		{
+// 			fdcan2_rx_callback();
+// 		}else	if(hfdcan == &hfdcan3)
+// 		{
+// 			fdcan3_rx_callback();
+// 		}
+// 	}
+// }

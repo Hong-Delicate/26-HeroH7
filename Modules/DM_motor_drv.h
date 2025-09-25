@@ -204,5 +204,5 @@ void read_motor_ctrl_fbdata(uint16_t id);
 void write_motor_data(uint16_t id, uint8_t rid, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
 void save_motor_data(uint16_t id, uint8_t rid);
 
-#endif /* __DM_MOTOR_DRV_H__ */
+#endif
 

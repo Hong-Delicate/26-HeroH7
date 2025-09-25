@@ -41,3 +41,5 @@
 26_heroh7\stm32h7xx_hal_msp.o: ../Core/Inc/main.h
 26_heroh7\stm32h7xx_hal_msp.o: ../Bsp/bsp_fdcan.h
 26_heroh7\stm32h7xx_hal_msp.o: ../Core/Inc/fdcan.h
+26_heroh7\stm32h7xx_hal_msp.o: ..\Modules\Djimotor.h
+26_heroh7\stm32h7xx_hal_msp.o: ..\Modules\dm_motor_drv.h

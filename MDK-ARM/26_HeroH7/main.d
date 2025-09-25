@@ -41,6 +41,8 @@
 26_heroh7\main.o: ../Core/Inc/main.h
 26_heroh7\main.o: ../Bsp/bsp_fdcan.h
 26_heroh7\main.o: ../Core/Inc/fdcan.h
+26_heroh7\main.o: ..\Modules\Djimotor.h
+26_heroh7\main.o: ..\Modules\dm_motor_drv.h
 26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 26_heroh7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 26_heroh7\main.o: ../Core/Inc/FreeRTOSConfig.h
