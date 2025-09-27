@@ -4,7 +4,8 @@
   "dependenceList": [],
   "srcDirs": [
     "../Task",
-    "../Modules"
+    "../Modules",
+    "../Components"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -585,7 +586,8 @@
           "../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
           ".cmsis/include",
           "RTE/_26_HeroH7",
-          "../Modules"
+          "../Modules",
+          "../Components"
         ],
         "libList": [],
         "defineList": [

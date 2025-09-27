@@ -69,7 +69,6 @@ void FDCAN2_Config(void)
 	{
 		Error_Handler();
 	}
-
 	/* 开启RX FIFO0的新数据中断 */
 	if (HAL_FDCAN_ActivateNotification(&hfdcan2, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0) != HAL_OK)
 	{
@@ -110,10 +109,10 @@ void FDCAN3_Config(void)
 	{
 		Error_Handler();
 	}
-	// if (HAL_FDCAN_ActivateNotification(&hfdcan3, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
-	// {
-	// 	Error_Handler();
-	// }
+	if (HAL_FDCAN_ActivateNotification(&hfdcan3, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
+	{
+		Error_Handler();
+	}
 	/* Start the FDCAN module */
 	if (HAL_FDCAN_Start(&hfdcan3) != HAL_OK)
 	{
@@ -154,14 +153,13 @@ uint8_t fdcanx_send_data(hcan_t *hfdcan, uint16_t id, uint8_t *data, uint32_t le
 		pTxHeader.DataLength = FDCAN_DLC_BYTES_48;
 	if(len==64)
 		pTxHeader.DataLength = FDCAN_DLC_BYTES_64;
-	
     pTxHeader.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
     pTxHeader.BitRateSwitch=FDCAN_BRS_ON;
     pTxHeader.FDFormat=FDCAN_CLASSIC_CAN;
     pTxHeader.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
     pTxHeader.MessageMarker=0;
  	while(HAL_FDCAN_GetTxFifoFreeLevel(hfdcan) == 0); // 等待有发送邮箱可用
-	if(HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &pTxHeader, data)!=HAL_OK) 
+	if(HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &pTxHeader, data)!=HAL_OK) 	
 		return 1;//发送
 	return 0;	
 }
@@ -271,19 +269,19 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 }
 
   
-// void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
-// {
-// 	if((RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) != RESET)
-// 	{
-// 		if(hfdcan == &hfdcan1)
-// 		{
-// 			fdcan1_rx_callback();
-// 		}else	if(hfdcan == &hfdcan2)
-// 		{
-// 			fdcan2_rx_callback();
-// 		}else	if(hfdcan == &hfdcan3)
-// 		{
-// 			fdcan3_rx_callback();
-// 		}
-// 	}
-// }
+void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
+{
+	if((RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) != RESET)
+	{
+		if(hfdcan == &hfdcan1)
+		{
+			fdcan1_rx_callback();
+		}else	if(hfdcan == &hfdcan2)
+		{
+			fdcan2_rx_callback();
+		}else	if(hfdcan == &hfdcan3)
+		{
+			fdcan3_rx_callback();
+		}
+	}
+}
