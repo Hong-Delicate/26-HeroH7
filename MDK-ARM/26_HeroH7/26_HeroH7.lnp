@@ -49,6 +49,11 @@
 "26_heroh7\dm_motor_drv.o"
 "26_heroh7\robstride.o"
 "26_heroh7\chassis_task.o"
+"26_heroh7\gimbal_task.o"
+"26_heroh7\outctl_task.o"
+"26_heroh7\shoot_task.o"
+"26_heroh7\pid.o"
+"26_heroh7\user_lib.o"
 --strict --scatter "26_HeroH7\26_HeroH7.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

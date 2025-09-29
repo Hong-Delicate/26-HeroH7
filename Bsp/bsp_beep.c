@@ -1,16 +1,6 @@
-/**
- ***************************************(C) COPYRIGHT 2026 DIODE***************************************
- * @file       bsp_beep.c
- * @brief      
- * @note       TIM12 CH2
- * @Version    V1.0.0
- * @Date       2025.8    
- ***************************************(C) COPYRIGHT 20256 DIODE***************************************
- */
 #include "bsp_beep.h"
 extern TIM_HandleTypeDef htim12;
 
-/* ·äÃùÆ÷Ãù½ÐÒ»¶ÎÊ±¼ä ms */
 void Beep(uint16_t ms)
 {
 	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_2);

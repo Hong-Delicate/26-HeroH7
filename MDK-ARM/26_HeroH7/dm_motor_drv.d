@@ -42,5 +42,5 @@
 26_heroh7\dm_motor_drv.o: ../Core/Inc/main.h
 26_heroh7\dm_motor_drv.o: ../Bsp/bsp_fdcan.h
 26_heroh7\dm_motor_drv.o: ../Core/Inc/fdcan.h
-26_heroh7\dm_motor_drv.o: ..\Modules\Djimotor.h
-26_heroh7\dm_motor_drv.o: ..\Modules\dm_motor_drv.h
+26_heroh7\dm_motor_drv.o: ../Modules/Djimotor.h
+26_heroh7\dm_motor_drv.o: ../Modules/dm_motor_drv.h

@@ -5,7 +5,8 @@
   "srcDirs": [
     "../Task",
     "../Modules",
-    "../Components"
+    "../Components",
+    "../Bsp"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -196,21 +197,6 @@
             "folders": []
           }
         ]
-      },
-      {
-        "name": "BSP",
-        "files": [
-          {
-            "path": "../Bsp/bsp_beep.c"
-          },
-          {
-            "path": "../Bsp/bsp_rc.c"
-          },
-          {
-            "path": "../Bsp/bsp_fdcan.c"
-          }
-        ],
-        "folders": []
       },
       {
         "name": "::CMSIS",
@@ -427,7 +413,9 @@
       }
     },
     "26_HeroH7": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/BSP"
+      ],
       "toolchain": "AC5",
       "compileConfig": {
         "cpuType": "Cortex-M7",

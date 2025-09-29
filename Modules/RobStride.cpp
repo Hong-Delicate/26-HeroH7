@@ -14,24 +14,24 @@
 
 
 
-/* ×ó1   ÓÒ1*/
+/* å·¦1   å³1*/
 /*   2     2*/
 //0.00133514404
 //-6.2212944
 //6.2579155
 //0.0108718872
-uint32_t Mailbox; // ¶¨ÒåÓÊÏä±äÁ¿
+uint32_t Mailbox; // å®šä¹‰é‚®ç®±å˜é‡
 RobStrite_Motor RobStrite03[] = {
-    RobStrite_Motor(0x01, &hfdcan1,-1,2.5307f-0.00133514404f),  // µÚ1¸ö¹Ø½Úµç»ú
-    RobStrite_Motor(0x02, &hfdcan1,-1,0.6108f+6.2212944f),  // µÚ2¸ö¹Ø½Úµç»ú
-    RobStrite_Motor(0x01, &hfdcan2,1,2.5307f-6.2579155f),  // µÚ3¸ö¹Ø½Úµç»ú
-	RobStrite_Motor(0x02, &hfdcan2,1,0.6108f-0.0108718872f)   // µÚ4¸ö¹Ø½Úµç»ú
+    RobStrite_Motor(0x01, &hfdcan1,-1,2.5307f-0.00133514404f),  // ç¬¬1ä¸ªå…³èŠ‚ç”µæœº
+    RobStrite_Motor(0x02, &hfdcan1,-1,0.6108f+6.2212944f),  // ç¬¬2ä¸ªå…³èŠ‚ç”µæœº
+    RobStrite_Motor(0x01, &hfdcan2,1,2.5307f-6.2579155f),  // ç¬¬3ä¸ªå…³èŠ‚ç”µæœº
+	RobStrite_Motor(0x02, &hfdcan2,1,0.6108f-0.0108718872f)   // ç¬¬4ä¸ªå…³èŠ‚ç”µæœº
 };
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÊµÀı»¯µÄ¹¹Ôìº¯Êı
-* @²ÎÊı         : CAN ID
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: ³õÊ¼»¯µç»úID¡£
+* @åŠŸèƒ½     		: RobStriteç”µæœºå®ä¾‹åŒ–çš„æ„é€ å‡½æ•°
+* @å‚æ•°         : CAN ID
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: åˆå§‹åŒ–ç”µæœºIDã€‚
 *******************************************************************************/
 RobStrite_Motor::RobStrite_Motor(uint8_t CAN_Id,FDCAN_HandleTypeDef *fdcan,int rotadir,float angle_offset)
 {
@@ -53,13 +53,13 @@ RobStrite_Motor::RobStrite_Motor(float (*Offset_MotoFunc)(float Motor_Tar) , uin
 
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: uint16_tĞÍ×ªfloatĞÍ¸¡µãÊı
-* @²ÎÊı1        : ĞèÒª×ª»»µÄÖµ
-* @²ÎÊı2        : xµÄ×îĞ¡Öµ
-* @²ÎÊı3        : xµÄ×î´óÖµ
-* @²ÎÊı4        : ĞèÒª×ª»»µÄ½øÖÆÊı
-* @·µ»ØÖµ 			: Ê®½øÖÆµÄfloatĞÍ¸¡µãÊı
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: uint16_tå‹è½¬floatå‹æµ®ç‚¹æ•°
+* @å‚æ•°1        : éœ€è¦è½¬æ¢çš„å€¼
+* @å‚æ•°2        : xçš„æœ€å°å€¼
+* @å‚æ•°3        : xçš„æœ€å¤§å€¼
+* @å‚æ•°4        : éœ€è¦è½¬æ¢çš„è¿›åˆ¶æ•°
+* @è¿”å›å€¼ 			: åè¿›åˆ¶çš„floatå‹æµ®ç‚¹æ•°
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 static float uint16_to_float(uint16_t x,float x_min,float x_max,int bits){
     uint32_t span = (1 << bits) - 1;
@@ -67,13 +67,13 @@ static float uint16_to_float(uint16_t x,float x_min,float x_max,int bits){
     return offset * x / span + x_min;
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: float¸¡µãÊı×ªintĞÍ
-* @²ÎÊı1        : ĞèÒª×ª»»µÄÖµ
-* @²ÎÊı2        : xµÄ×îĞ¡Öµ
-* @²ÎÊı3        : xµÄ×î´óÖµ
-* @²ÎÊı4        : ĞèÒª×ª»»µÄ½øÖÆÊı
-* @·µ»ØÖµ 			: Ê®½øÖÆµÄintĞÍÕûÊı
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: floatæµ®ç‚¹æ•°è½¬intå‹
+* @å‚æ•°1        : éœ€è¦è½¬æ¢çš„å€¼
+* @å‚æ•°2        : xçš„æœ€å°å€¼
+* @å‚æ•°3        : xçš„æœ€å¤§å€¼
+* @å‚æ•°4        : éœ€è¦è½¬æ¢çš„è¿›åˆ¶æ•°
+* @è¿”å›å€¼ 			: åè¿›åˆ¶çš„intå‹æ•´æ•°
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 static int float_to_uint(float x,float x_min,float x_max,int bits)
 {
@@ -84,10 +84,10 @@ static int float_to_uint(float x,float x_min,float x_max,int bits)
 	return (int) ((x - offset)*((float)((1<<bits)-1))/span);
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: uint8_tÊı×é×ªfloat¸¡µãÊı
-* @²ÎÊı        	: ĞèÒª×ª»»µÄÊı×é
-* @·µ»ØÖµ 			: Ê®½øÖÆµÄfloatĞÍ¸¡µãÊı
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: uint8_tæ•°ç»„è½¬floatæµ®ç‚¹æ•°
+* @å‚æ•°        	: éœ€è¦è½¬æ¢çš„æ•°ç»„
+* @è¿”å›å€¼ 			: åè¿›åˆ¶çš„floatå‹æµ®ç‚¹æ•°
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 float Byte_to_float(uint8_t* bytedata)  
 {  
@@ -97,11 +97,11 @@ float Byte_to_float(uint8_t* bytedata)
 }  
 //int count_num = 0 ;
 /*******************************************************************************
-* @¹¦ÄÜ     		: ½ÓÊÕ´¦Àíº¯Êı		£¨Í¨ĞÅÀàĞÍ2 17Ó¦´ğÖ¡ 0Ó¦´ğÖ¡£©
-* @²ÎÊı1        : ½ÓÊÕµ½µÄÊı¾İ
-* @²ÎÊı2        : ½ÓÊÕµ½µÄCANID
-* @·µ»ØÖµ 			: None
-* @¸ÅÊö  				: drwÖ»ÓĞÍ¨¹ıÍ¨ĞÅ17·¢ËÍÒÔºó²ÅÓĞÖµ
+* @åŠŸèƒ½     		: æ¥æ”¶å¤„ç†å‡½æ•°		ï¼ˆé€šä¿¡ç±»å‹2 17åº”ç­”å¸§ 0åº”ç­”å¸§ï¼‰
+* @å‚æ•°1        : æ¥æ”¶åˆ°çš„æ•°æ®
+* @å‚æ•°2        : æ¥æ”¶åˆ°çš„CANID
+* @è¿”å›å€¼ 			: None
+* @æ¦‚è¿°  				: drwåªæœ‰é€šè¿‡é€šä¿¡17å‘é€ä»¥åæ‰æœ‰å€¼
 *******************************************************************************/
 void RobStrite_Motor::RobStrite_Motor_Analysis(uint8_t *DataFrame,uint32_t ID_ExtId)
 {
@@ -180,15 +180,15 @@ void RobStrite_Motor::RobStrite_Motor_Analysis(uint8_t *DataFrame,uint32_t ID_Ex
 	}
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»ú»ñÈ¡Éè±¸IDºÍMCU£¨Í¨ĞÅÀàĞÍ0£©
-* @²ÎÊı         : None
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºè·å–è®¾å¤‡IDå’ŒMCUï¼ˆé€šä¿¡ç±»å‹0ï¼‰
+* @å‚æ•°         : None
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::RobStrite_Get_CAN_ID()
 {
-	uint8_t txdata[8] = {0};						   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};						   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 //  TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
@@ -200,13 +200,13 @@ void RobStrite_Motor::RobStrite_Get_CAN_ID()
 	TxMessage.MessageMarker=0;
 	
 	TxMessage.Identifier = Communication_Type_Get_ID<<24|Master_CAN_ID <<8|CAN_ID;
-  //HAL_CAN_AddTxMessage(hfdcan, &TxMessage, txdata, &Mailbox); // ·¢ËÍCANÏûÏ¢
+  //HAL_CAN_AddTxMessage(hfdcan, &TxMessage, txdata, &Mailbox); // å‘é€CANæ¶ˆæ¯
 	HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);
 }
 void SearchMotor(FDCAN_HandleTypeDef *hfdcan,uint8_t CAN_ID)
 {
-	uint8_t txdata[8] = {0};						   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};						   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 //  TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
@@ -217,23 +217,23 @@ void SearchMotor(FDCAN_HandleTypeDef *hfdcan,uint8_t CAN_ID)
 	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
 	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_Get_ID<<24|0x1f <<8|CAN_ID;
-  //HAL_CAN_AddTxMessage(hfdcan, &TxMessage, txdata, &Mailbox); // ·¢ËÍCANÏûÏ¢
+  //HAL_CAN_AddTxMessage(hfdcan, &TxMessage, txdata, &Mailbox); // å‘é€CANæ¶ˆæ¯
 	HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÔË¿ØÄ£Ê½  £¨Í¨ĞÅÀàĞÍ1£©
-* @²ÎÊı1        : Á¦¾Ø£¨-4Nm~4Nm£©
-* @²ÎÊı2        : Ä¿±ê½Ç¶È(-4¦Ğ~4¦Ğ)
-* @²ÎÊı3        : Ä¿±ê½ÇËÙ¶È(-30rad/s~30rad/s)
-* @²ÎÊı4        : Kp(0.0~500.0)
-* @²ÎÊı5        : Kp(0.0~5.0)
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºè¿æ§æ¨¡å¼  ï¼ˆé€šä¿¡ç±»å‹1ï¼‰
+* @å‚æ•°1        : åŠ›çŸ©ï¼ˆ-4Nm~4Nmï¼‰
+* @å‚æ•°2        : ç›®æ ‡è§’åº¦(-4Ï€~4Ï€)
+* @å‚æ•°3        : ç›®æ ‡è§’é€Ÿåº¦(-30rad/s~30rad/s)
+* @å‚æ•°4        : Kp(0.0~500.0)
+* @å‚æ•°5        : Kp(0.0~5.0)
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::RobStrite_Motor_move_control(float Torque, float Angle, float Speed, float Kp, float Kd)
 {
-	uint8_t txdata[8] = {0};						   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 					//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};						   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 					//å‘é€é‚®ç®±
 	Motor_Set_All.set_Torque = Rota_dir*Torque;
 	Motor_Set_All.set_angle = Rota_dir*Angle + ang_offset;	
 	Motor_Set_All.set_speed = Rota_dir*Speed;
@@ -241,7 +241,7 @@ void RobStrite_Motor::RobStrite_Motor_move_control(float Torque, float Angle, fl
 	Motor_Set_All.set_Kd = Kd;
 	if (drw.run_mode.data != 0 && Pos_Info.pattern == 2)
 	{
-		Set_RobStrite_Motor_parameter(0X7005, move_control_mode, Set_mode);		//ÉèÖÃµç»úÄ£Ê½
+		Set_RobStrite_Motor_parameter(0X7005, move_control_mode, Set_mode);		//è®¾ç½®ç”µæœºæ¨¡å¼
 		Get_RobStrite_Motor_parameter(0x7005);
 		Motor_Set_All.set_motor_mode = move_control_mode;
 	}
@@ -267,11 +267,11 @@ void RobStrite_Motor::RobStrite_Motor_move_control(float Torque, float Angle, fl
 	HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÎ»ÖÃÄ£Ê½ 
-* @²ÎÊı1        : Ä¿±ê½ÇËÙ¶È(-30rad/s~30rad/s)
-* @²ÎÊı2        : Ä¿±ê½Ç¶È(-4¦Ğ~4¦Ğ)
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºä½ç½®æ¨¡å¼ 
+* @å‚æ•°1        : ç›®æ ‡è§’é€Ÿåº¦(-30rad/s~30rad/s)
+* @å‚æ•°2        : ç›®æ ‡è§’åº¦(-4Ï€~4Ï€)
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::RobStrite_Motor_Pos_control(float Speed, float acceleration, float Angle)
 {
@@ -279,7 +279,7 @@ void RobStrite_Motor::RobStrite_Motor_Pos_control(float Speed, float acceleratio
 	Motor_Set_All.set_angle = Rota_dir*Angle + ang_offset;
 	if (drw.run_mode.data != 1 && Pos_Info.pattern == 2)
 	{
-		Set_RobStrite_Motor_parameter(0X7005, Pos_control_mode, Set_mode);		//ÉèÖÃµç»úÄ£Ê½
+		Set_RobStrite_Motor_parameter(0X7005, Pos_control_mode, Set_mode);		//è®¾ç½®ç”µæœºæ¨¡å¼
 		Get_RobStrite_Motor_parameter(0x7005);
 		Motor_Set_All.set_motor_mode = Pos_control_mode;
 	}
@@ -288,11 +288,11 @@ void RobStrite_Motor::RobStrite_Motor_Pos_control(float Speed, float acceleratio
 	Set_RobStrite_Motor_parameter(0X7016, Motor_Set_All.set_angle, Set_parameter);
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úËÙ¶ÈÄ£Ê½ 
-* @²ÎÊı1        : Ä¿±ê½ÇËÙ¶È(-30rad/s~30rad/s)
-* @²ÎÊı2        : Ä¿±êµçÁ÷ÏŞÖÆ(0~23A)
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºé€Ÿåº¦æ¨¡å¼ 
+* @å‚æ•°1        : ç›®æ ‡è§’é€Ÿåº¦(-30rad/s~30rad/s)
+* @å‚æ•°2        : ç›®æ ‡ç”µæµé™åˆ¶(0~23A)
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 uint8_t count_set_motor_mode_Speed = 0;
 void RobStrite_Motor::RobStrite_Motor_Speed_control(float Speed,float acceleration, float limit_cur)
@@ -301,22 +301,22 @@ void RobStrite_Motor::RobStrite_Motor_Speed_control(float Speed,float accelerati
 	Motor_Set_All.set_limit_cur = limit_cur;
 //	if (Motor_Set_All.set_motor_mode != 2 && Pos_Info.pattern == 2)
 //	{
-//		Set_RobStrite_Motor_parameter(0X7005, Speed_control_mode, Set_mode);		//ÉèÖÃµç»úÄ£Ê½
+//		Set_RobStrite_Motor_parameter(0X7005, Speed_control_mode, Set_mode);		//è®¾ç½®ç”µæœºæ¨¡å¼
 //		//Get_RobStrite_Motor_parameter(0x7005);
 	Motor_Set_All.set_motor_mode = Speed_control_mode;
 //	}
 //	if (count_set_motor_mode_Speed % 2 == 0)
-	Set_RobStrite_Motor_parameter(0X7005, Speed_control_mode, Set_mode);		//ÉèÖÃµç»úÄ£Ê½
+	Set_RobStrite_Motor_parameter(0X7005, Speed_control_mode, Set_mode);		//è®¾ç½®ç”µæœºæ¨¡å¼
 	count_set_motor_mode_Speed++;
 	Set_RobStrite_Motor_parameter(0X7018, Motor_Set_All.set_limit_cur, Set_parameter);
   	Set_RobStrite_Motor_parameter(0X7022, Motor_Set_All.set_acceleration, Set_parameter);	
 	Set_RobStrite_Motor_parameter(0X700A, Motor_Set_All.set_speed, Set_parameter);
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úµçÁ÷Ä£Ê½
-* @²ÎÊı         : Ä¿±êµçÁ÷(-23~23A)
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºç”µæµæ¨¡å¼
+* @å‚æ•°         : ç›®æ ‡ç”µæµ(-23~23A)
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 uint8_t count_set_motor_mode = 0;
 void RobStrite_Motor::RobStrite_Motor_current_control(float current)
@@ -325,35 +325,35 @@ void RobStrite_Motor::RobStrite_Motor_current_control(float current)
 	output = Motor_Set_All.set_current;
 	if (Pos_Info.pattern == 2 && Motor_Set_All.set_motor_mode != 3)
 	{
-		Set_RobStrite_Motor_parameter(0X7005, Elect_control_mode, Set_mode);		//ÉèÖÃµç»úÄ£Ê½
+		Set_RobStrite_Motor_parameter(0X7005, Elect_control_mode, Set_mode);		//è®¾ç½®ç”µæœºæ¨¡å¼
 		//Get_RobStrite_Motor_parameter(0x7005);
 		Motor_Set_All.set_motor_mode = Elect_control_mode;
 	}
 	if (count_set_motor_mode % 50 == 0)
-		Set_RobStrite_Motor_parameter(0X7005, Elect_control_mode, Set_mode);		//ÉèÖÃµç»úÄ£Ê½
+		Set_RobStrite_Motor_parameter(0X7005, Elect_control_mode, Set_mode);		//è®¾ç½®ç”µæœºæ¨¡å¼
 	count_set_motor_mode++;
 	Set_RobStrite_Motor_parameter(0X7006, Motor_Set_All.set_current, Set_parameter);
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÁãµãÄ£Ê½
-* @²ÎÊı         : None
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºé›¶ç‚¹æ¨¡å¼
+* @å‚æ•°         : None
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::RobStrite_Motor_Set_Zero_control()
 {
-	Set_RobStrite_Motor_parameter(0X7005, Set_Zero_mode, Set_mode);					//ÉèÖÃµç»úÄ£Ê½
+	Set_RobStrite_Motor_parameter(0X7005, Set_Zero_mode, Set_mode);					//è®¾ç½®ç”µæœºæ¨¡å¼
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÊ¹ÄÜ £¨Í¨ĞÅÀàĞÍ3£©
-* @²ÎÊı         : None
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºä½¿èƒ½ ï¼ˆé€šä¿¡ç±»å‹3ï¼‰
+* @å‚æ•°         : None
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::Enable_Motor()
 {
-	uint8_t txdata[8] = {0};				//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};				//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
@@ -364,18 +364,18 @@ void RobStrite_Motor::Enable_Motor()
 	TxMessage.MessageMarker=0;
 	
 	TxMessage.Identifier = Communication_Type_MotorEnable<<24|Master_CAN_ID<<8|CAN_ID;
-  	HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // ·¢ËÍCANÏûÏ¢
+  	HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // å‘é€CANæ¶ˆæ¯
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÊ§ÄÜ £¨Í¨ĞÅÀàĞÍ4£©
-* @²ÎÊı         : ÊÇ·ñÇå³ı´íÎóÎ»£¨0²»Çå³ı 1Çå³ı£©
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºå¤±èƒ½ ï¼ˆé€šä¿¡ç±»å‹4ï¼‰
+* @å‚æ•°         : æ˜¯å¦æ¸…é™¤é”™è¯¯ä½ï¼ˆ0ä¸æ¸…é™¤ 1æ¸…é™¤ï¼‰
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::Disenable_Motor(uint8_t clear_error)
 {
-	uint8_t txdata[8] = {0};					   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};					   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 	
 	txdata[0] = clear_error;
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
@@ -389,20 +389,20 @@ void RobStrite_Motor::Disenable_Motor(uint8_t clear_error)
 	
 	TxMessage.Identifier = Communication_Type_MotorStop<<24|Master_CAN_ID<<8|CAN_ID;
 	
- 	 HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // ·¢ËÍCANÏûÏ¢
+ 	 HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // å‘é€CANæ¶ˆæ¯
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úĞ´Èë²ÎÊı £¨Í¨ĞÅÀàĞÍ18£©
-* @²ÎÊı1        : ²ÎÊıµØÖ·
-* @²ÎÊı2        : ²ÎÊıÊıÖµ
-* @²ÎÊı3        : Ñ¡ÔñÊÇ´«Èë¿ØÖÆÄ£Ê½ »¹ÊÇÆäËû²ÎÊı £¨Set_modeÉèÖÃ¿ØÖÆÄ£Ê½ Set_parameterÉèÖÃ²ÎÊı£©
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºå†™å…¥å‚æ•° ï¼ˆé€šä¿¡ç±»å‹18ï¼‰
+* @å‚æ•°1        : å‚æ•°åœ°å€
+* @å‚æ•°2        : å‚æ•°æ•°å€¼
+* @å‚æ•°3        : é€‰æ‹©æ˜¯ä¼ å…¥æ§åˆ¶æ¨¡å¼ è¿˜æ˜¯å…¶ä»–å‚æ•° ï¼ˆSet_modeè®¾ç½®æ§åˆ¶æ¨¡å¼ Set_parameterè®¾ç½®å‚æ•°ï¼‰
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::Set_RobStrite_Motor_parameter(uint16_t Index, float Value, char Value_mode)
 {
-	uint8_t txdata[8] = {0};						   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};						   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
@@ -429,18 +429,18 @@ void RobStrite_Motor::Set_RobStrite_Motor_parameter(uint16_t Index, float Value,
 		txdata[6] = 0x00;	
 		txdata[7] = 0x00;	
 	}
-  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // ·¢ËÍCANÏûÏ¢
+  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata); // å‘é€CANæ¶ˆæ¯
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úµ¥¸ö²ÎÊı¶ÁÈ¡ £¨Í¨ĞÅÀàĞÍ17£©
-* @²ÎÊı         : ²ÎÊıµØÖ·
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºå•ä¸ªå‚æ•°è¯»å– ï¼ˆé€šä¿¡ç±»å‹17ï¼‰
+* @å‚æ•°         : å‚æ•°åœ°å€
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::Get_RobStrite_Motor_parameter(uint16_t Index)
 {
-	uint8_t txdata[8] = {0};						   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};						   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 	txdata[0] = Index;
 	txdata[1] = Index>>8;
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
@@ -452,19 +452,19 @@ void RobStrite_Motor::Get_RobStrite_Motor_parameter(uint16_t Index)
 	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
 	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_GetSingleParameter<<24|Master_CAN_ID<<8|CAN_ID;
-  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// ·¢ËÍCANÏûÏ¢
+  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// å‘é€CANæ¶ˆæ¯
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÉèÖÃCAN_ID £¨Í¨ĞÅÀàĞÍ7£©
-* @²ÎÊı         : ĞŞ¸Äºó£¨Ô¤Éè£©CANID
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: None
+* @åŠŸèƒ½     		: RobStriteç”µæœºè®¾ç½®CAN_ID ï¼ˆé€šä¿¡ç±»å‹7ï¼‰
+* @å‚æ•°         : ä¿®æ”¹åï¼ˆé¢„è®¾ï¼‰CANID
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: None
 *******************************************************************************/
 void RobStrite_Motor::Set_CAN_ID(uint8_t Set_CAN_ID)
 {
 	Disenable_Motor(0);
-	uint8_t txdata[8] = {0};						   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	uint8_t txdata[8] = {0};						   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
@@ -474,19 +474,19 @@ void RobStrite_Motor::Set_CAN_ID(uint8_t Set_CAN_ID)
 	TxMessage.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
 	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_Can_ID<<24|Set_CAN_ID<<16|Master_CAN_ID<<8|CAN_ID;
-  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// ·¢ËÍCANÏûÏ¢
+  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// å‘é€CANæ¶ˆæ¯
 }
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÉèÖÃ»úĞµÁãµã £¨Í¨ĞÅÀàĞÍ6£©
-* @²ÎÊı         : None
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: »á°Ñµ±Ç°µç»úÎ»ÖÃÉèÎª»úĞµÁãÎ»£¬ »áÏÈÊ§ÄÜµç»ú, ÔÙÊ¹ÄÜµç»ú
+* @åŠŸèƒ½     		: RobStriteç”µæœºè®¾ç½®æœºæ¢°é›¶ç‚¹ ï¼ˆé€šä¿¡ç±»å‹6ï¼‰
+* @å‚æ•°         : None
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: ä¼šæŠŠå½“å‰ç”µæœºä½ç½®è®¾ä¸ºæœºæ¢°é›¶ä½ï¼Œ ä¼šå…ˆå¤±èƒ½ç”µæœº, å†ä½¿èƒ½ç”µæœº
 *******************************************************************************/
 void RobStrite_Motor::Set_ZeroPos()
 {
-	Disenable_Motor(0);							//Ê§ÄÜµç»ú
-	uint8_t txdata[8] = {0};						   	//·¢ËÍÊı¾İ
-	FDCAN_TxHeaderTypeDef TxMessage; 	//·¢ËÍÓÊÏä
+	Disenable_Motor(0);							//å¤±èƒ½ç”µæœº
+	uint8_t txdata[8] = {0};						   	//å‘é€æ•°æ®
+	FDCAN_TxHeaderTypeDef TxMessage; 	//å‘é€é‚®ç®±
 	TxMessage.IdType=FDCAN_EXTENDED_ID;
 	TxMessage.TxFrameType = FDCAN_DATA_FRAME;
 	TxMessage.DataLength = 8;
@@ -497,15 +497,15 @@ void RobStrite_Motor::Set_ZeroPos()
 	TxMessage.MessageMarker=0;
 	TxMessage.Identifier = Communication_Type_SetPosZero<<24|Master_CAN_ID<<8|CAN_ID;
 	txdata[0] = 1;
-  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// ·¢ËÍCANÏûÏ¢
+  HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxMessage, txdata);// å‘é€CANæ¶ˆæ¯
 	Enable_Motor();
 }
 
 /*******************************************************************************
-* @¹¦ÄÜ     		: RobStriteµç»úÊı¾İµÄ²ÎÊıµØÖ·³õÊ¼»¯
-* @²ÎÊı         : Êı¾İµÄ²ÎÊıµØÖ·Êı×é
-* @·µ»ØÖµ 			: void
-* @¸ÅÊö  				: »áÔÚ´´½¨µç»úÀàÊ±×Ô¶¯µ÷ÓÃ
+* @åŠŸèƒ½     		: RobStriteç”µæœºæ•°æ®çš„å‚æ•°åœ°å€åˆå§‹åŒ–
+* @å‚æ•°         : æ•°æ®çš„å‚æ•°åœ°å€æ•°ç»„
+* @è¿”å›å€¼ 			: void
+* @æ¦‚è¿°  				: ä¼šåœ¨åˆ›å»ºç”µæœºç±»æ—¶è‡ªåŠ¨è°ƒç”¨
 *******************************************************************************/
 data_read_write::data_read_write(const uint16_t *index_list)
 {
@@ -526,7 +526,7 @@ data_read_write::data_read_write(const uint16_t *index_list)
 	rotation.index = index_list[14];
 }
 
-// È¡ÏûËùÓĞºê¶¨Òå
+// å–æ¶ˆæ‰€æœ‰å®å®šä¹‰
 #undef P_MIN
 #undef P_MAX
 #undef V_MIN

@@ -42,6 +42,6 @@
 26_heroh7\robstride.o: ../Core/Inc/main.h
 26_heroh7\robstride.o: ../Bsp/bsp_fdcan.h
 26_heroh7\robstride.o: ../Core/Inc/fdcan.h
-26_heroh7\robstride.o: ..\Modules\Djimotor.h
-26_heroh7\robstride.o: ..\Modules\dm_motor_drv.h
+26_heroh7\robstride.o: ../Modules/Djimotor.h
+26_heroh7\robstride.o: ../Modules/dm_motor_drv.h
 26_heroh7\robstride.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

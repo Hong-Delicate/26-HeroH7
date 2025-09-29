@@ -5,60 +5,57 @@
  extern "C" {
 #endif
 
-
-/* 定义3508状态结构体，存储当前3508的反馈值*/
 typedef struct {
-    int16_t  	set_current;	// 写入的内环算出电流
-		float set_speed;  //外环算出的速度
-    uint16_t 	angle;			// 角度
+    int16_t  	set_current;	
+		float set_speed;  
+    uint16_t 	angle;	
 	  int16_t  	last_angle;
 	  float 		total_angle;
-    int16_t 	speed;			// 速度
-    int16_t		current;		// 电流
-    uint8_t 	temperature;	// 温度
+    int16_t 	speed;		
+    int16_t		current;		
+    uint8_t 	temperature;
 } CAN_M3508_TypeDef;
 
 
-/* 定义6020状态结构体，存储当前6020的反馈值*/
+
 typedef struct
 {
-  int16_t  set_voltage;	// 写入的内环算出电压
-	float set_angle_speed;//外环算出的角速度
-  int16_t angle;			// 角度
-	int16_t  	last_angle;
-	float 		total_angle;
-  int16_t  speed;         // 速度
-  int16_t  current;       // 电流
-  int8_t  temperature;   // 温度
-
+    int16_t  set_voltage;
+    float set_angle_speed;
+    int16_t angle;			
+    int16_t  	last_angle;
+    float 		total_angle;
+    int16_t  speed;     
+    int16_t  current;       
+    int8_t  temperature;  
 } CAN_GM6020_TypeDef;
 
-/* 定义2006状态结构体，存储当前6020的反馈值*/
+
 typedef struct
 {
-    int16_t  set_current;	// 写入的电流
-    uint16_t angle;			// 角度
-	int16_t  	last_angle;
-	float 		total_angle;
-    int16_t  speed;         // 速度
-    int16_t  current;       // 电流
-    uint8_t  temperature;   // 温度
+    int16_t  set_current;	
+    uint16_t angle;		
+    int16_t  	last_angle;
+    float 		total_angle;
+    int16_t  speed;      
+    int16_t  current;    
+    uint8_t  temperature;  
 } CAN_M2006_TypeDef;
 
-/******************** 电机反馈ID 定义***********************/
-#define	CAN1_M3508_ID1 0x201	// 底盘电机0   
-#define	CAN1_M3508_ID2 0x202	// 底盘电机1
-#define	CAN1_M3508_ID3 0x203	// 底盘电机2
-#define	CAN1_M3508_ID4 0x204	// 底盘电机3
-#define CAN1_GM6020_ID1  0x205	// 云台yaw电机            
 
-#define CAN2_GM6020_ID1  0x205	// 云台pitch电机
-#define	CAN2_M3508_ID2  0x202	// 摩擦轮电机 左3
-#define	CAN2_M3508_ID3  0x203	// 摩擦轮电机 右4
-#define CAN2_M2006_ID1  0x201	// 拨盘电机
-/**********************************************************/
+#define	CAN1_M3508_ID1 0x201	  
+#define	CAN1_M3508_ID2 0x202	
+#define	CAN1_M3508_ID3 0x203
+#define	CAN1_M3508_ID4 0x204	
+#define CAN1_GM6020_ID1  0x205	           
 
-extern CAN_GM6020_TypeDef 	CAN_GM6020[];	// 云台电机
+#define CAN2_GM6020_ID1  0x205	
+#define	CAN2_M3508_ID2  0x202	
+#define	CAN2_M3508_ID3  0x203	
+#define CAN2_M2006_ID1  0x201	
+
+
+extern CAN_GM6020_TypeDef 	CAN_GM6020[];	
 extern CAN_M2006_TypeDef 	CAN_M2006[];
 extern CAN_M3508_TypeDef 	CAN_M3508[];
 void get_total_angle(CAN_M3508_TypeDef *p);

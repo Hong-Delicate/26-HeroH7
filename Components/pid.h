@@ -41,12 +41,12 @@ extern PID_TypeDef PID_M2006_speed[2];
 extern PID_TypeDef PID_M3508[7];	// 定义M3508 PID结构体
 extern PID_TypeDef PID_M3508_speed[7];  // 定义M3508 角度PID结构体
 extern PID_TypeDef PID_M3508_Follow;
-extern PID_TypeDef PID_DM4310[1];
-extern PID_TypeDef PID_DM4310_speed[1];
+extern PID_TypeDef PID_DM4310;
+extern PID_TypeDef PID_DM4310_speed;
 
 
 void PID_Init(
-    PID_TypeDef*	pid,
+    PID_TypeDef*	    pid,
     uint32_t 			mode,
     uint32_t 			maxout,
     uint32_t 			intergral_limit,

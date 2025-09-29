@@ -11,26 +11,26 @@
 #include "main.h"
 #include "fdcan.h"
  
- #define Set_mode 		 'j'				//ÉèÖÃ¿ØÖÆÄ£Ê½
- #define Set_parameter 'p'				//ÉèÖÃ²ÎÊı
- //¸÷ÖÖ¿ØÖÆÄ£Ê½
- #define move_control_mode  0	//ÔË¿ØÄ£Ê½
- #define Pos_control_mode   1	//Î»ÖÃÄ£Ê½
- #define Speed_control_mode 2 //ËÙ¶ÈÄ£Ê½
- #define Elect_control_mode 3 //µçÁ÷Ä£Ê½
- #define Set_Zero_mode      4 //ÁãµãÄ£Ê½
- //Í¨ĞÅµØÖ·
-#define Communication_Type_Get_ID 0x00     					//»ñÈ¡Éè±¸µÄIDºÍ64Î»MCUÎ¨Ò»±êÊ¶·û`
-#define Communication_Type_MotionControl 0x01 			//ÔË¿ØÄ£Ê½ÓÃÀ´ÏòÖ÷»ú·¢ËÍ¿ØÖÆÖ¸Áî
-#define Communication_Type_MotorRequest 0x02				//ÓÃÀ´ÏòÖ÷»ú·´À¡µç»úÔËĞĞ×´Ì¬
-#define Communication_Type_MotorEnable 0x03					//µç»úÊ¹ÄÜÔËĞĞ
-#define Communication_Type_MotorStop 0x04						//µç»úÍ£Ö¹ÔËĞĞ
-#define Communication_Type_SetPosZero 0x06					//ÉèÖÃµç»ú»úĞµÁãÎ»
-#define Communication_Type_Can_ID 0x07							//¸ü¸Äµ±Ç°µç»úCAN_ID
-#define Communication_Type_Control_Mode 0x12				//ÉèÖÃµç»úÄ£Ê½
-#define Communication_Type_GetSingleParameter 0x11	//¶ÁÈ¡µ¥¸ö²ÎÊı
-#define Communication_Type_SetSingleParameter 0x12	//Éè¶¨µ¥¸ö²ÎÊı
-#define Communication_Type_ErrorFeedback 0x15				//¹ÊÕÏ·´À¡Ö¡
+ #define Set_mode 		 'j'				//è®¾ç½®æ§åˆ¶æ¨¡å¼
+ #define Set_parameter 'p'				//è®¾ç½®å‚æ•°
+ //å„ç§æ§åˆ¶æ¨¡å¼
+ #define move_control_mode  0	//è¿æ§æ¨¡å¼
+ #define Pos_control_mode   1	//ä½ç½®æ¨¡å¼
+ #define Speed_control_mode 2 //é€Ÿåº¦æ¨¡å¼
+ #define Elect_control_mode 3 //ç”µæµæ¨¡å¼
+ #define Set_Zero_mode      4 //é›¶ç‚¹æ¨¡å¼
+ //é€šä¿¡åœ°å€
+#define Communication_Type_Get_ID 0x00     					//è·å–è®¾å¤‡çš„IDå’Œ64ä½MCUå”¯ä¸€æ ‡è¯†ç¬¦`
+#define Communication_Type_MotionControl 0x01 			//è¿æ§æ¨¡å¼ç”¨æ¥å‘ä¸»æœºå‘é€æ§åˆ¶æŒ‡ä»¤
+#define Communication_Type_MotorRequest 0x02				//ç”¨æ¥å‘ä¸»æœºåé¦ˆç”µæœºè¿è¡ŒçŠ¶æ€
+#define Communication_Type_MotorEnable 0x03					//ç”µæœºä½¿èƒ½è¿è¡Œ
+#define Communication_Type_MotorStop 0x04						//ç”µæœºåœæ­¢è¿è¡Œ
+#define Communication_Type_SetPosZero 0x06					//è®¾ç½®ç”µæœºæœºæ¢°é›¶ä½
+#define Communication_Type_Can_ID 0x07							//æ›´æ”¹å½“å‰ç”µæœºCAN_ID
+#define Communication_Type_Control_Mode 0x12				//è®¾ç½®ç”µæœºæ¨¡å¼
+#define Communication_Type_GetSingleParameter 0x11	//è¯»å–å•ä¸ªå‚æ•°
+#define Communication_Type_SetSingleParameter 0x12	//è®¾å®šå•ä¸ªå‚æ•°
+#define Communication_Type_ErrorFeedback 0x15				//æ•…éšœåé¦ˆå¸§
 
 #ifdef __cplusplus
 
@@ -41,28 +41,28 @@ class data_read_write_one
 		float data;
 };
 static const uint16_t Index_List[] = {0X7005, 0X7006, 0X700A, 0X700B, 0X7010, 0X7011, 0X7014, 0X7016, 0X7017, 0X7018, 0x7019, 0x701A, 0x701B, 0x701C, 0x701D};
-//18Í¨ĞÅÀàĞÍ¿ÉÒÔĞ´ÈëµÄ²ÎÊıÁĞ±í
-//²ÎÊı±äÁ¿Ãû			²ÎÊıµØÖ·			ÃèÊö			ÀàĞÍ			×Ö½ÚÊı			µ¥Î»/ËµÃ÷
-class data_read_write			//¿É¶ÁĞ´µÄ²ÎÊı
+//18é€šä¿¡ç±»å‹å¯ä»¥å†™å…¥çš„å‚æ•°åˆ—è¡¨
+//å‚æ•°å˜é‡å			å‚æ•°åœ°å€			æè¿°			ç±»å‹			å­—èŠ‚æ•°			å•ä½/è¯´æ˜
+class data_read_write			//å¯è¯»å†™çš„å‚æ•°
 {
 	
 	public:
-		data_read_write_one run_mode;				//0:ÔË¿ØÄ£Ê½ 1:Î»ÖÃÄ£Ê½ 2:ËÙ¶ÈÄ£Ê½ 3:µçÁ÷Ä£Ê½ 4:ÁãµãÄ£Ê½ uint8  1byte
-		data_read_write_one iq_ref;					//µçÁ÷Ä£Ê½IqÖ¸Áî   				float 	4byte 	-23~23A
-		data_read_write_one spd_ref;				//×ªËÙÄ£Ê½×ªËÙÖ¸Áî 				float 	4byte 	-30~30rad/s 
-		data_read_write_one imit_torque;		//×ª¾ØÏŞÖÆ 								float 	4byte 	0~12Nm  
-		data_read_write_one cur_kp;					//µçÁ÷µÄ Kp 							float 	4byte 	Ä¬ÈÏÖµ 0.125  
-		data_read_write_one cur_ki;					//µçÁ÷µÄ Ki 							float 	4byte 	Ä¬ÈÏÖµ 0.0158  
-		data_read_write_one cur_filt_gain;	//µçÁ÷ÂË²¨ÏµÊıfilt_gain 	float 	4byte 	0~1.0£¬Ä¬ÈÏÖµ0.1  
-		data_read_write_one loc_ref;				//Î»ÖÃÄ£Ê½½Ç¶ÈÖ¸Áî				float 	4byte 	rad  
-		data_read_write_one limit_spd;			//Î»ÖÃÄ£Ê½ËÙ¶ÈÉèÖÃ				float 	4byte 	0~30rad/s  
-		data_read_write_one limit_cur;			//ËÙ¶ÈÎ»ÖÃÄ£Ê½µçÁ÷ÉèÖÃ 		float 	4byte 	0~23A
-		//ÒÔÏÂÖ»¿É¶Á
-		data_read_write_one mechPos;				//¸ºÔØ¶Ë¼ÆÈ¦»úĞµ½Ç¶È			float 	4byte 	rad
-		data_read_write_one iqf;						//iq ÂË²¨Öµ 							float 	4byte 	-23~23A
-		data_read_write_one	mechVel;				//¸ºÔØ¶Ë×ªËÙ							float 	4byte 	-30~30rad/s 	
-		data_read_write_one	VBUS;						//Ä¸ÏßµçÑ¹								float 	4byte 	V	
-		data_read_write_one	rotation;				//È¦Êı 										int16 	2byte   È¦Êı
+		data_read_write_one run_mode;				//0:è¿æ§æ¨¡å¼ 1:ä½ç½®æ¨¡å¼ 2:é€Ÿåº¦æ¨¡å¼ 3:ç”µæµæ¨¡å¼ 4:é›¶ç‚¹æ¨¡å¼ uint8  1byte
+		data_read_write_one iq_ref;					//ç”µæµæ¨¡å¼IqæŒ‡ä»¤   				float 	4byte 	-23~23A
+		data_read_write_one spd_ref;				//è½¬é€Ÿæ¨¡å¼è½¬é€ŸæŒ‡ä»¤ 				float 	4byte 	-30~30rad/s 
+		data_read_write_one imit_torque;		//è½¬çŸ©é™åˆ¶ 								float 	4byte 	0~12Nm  
+		data_read_write_one cur_kp;					//ç”µæµçš„ Kp 							float 	4byte 	é»˜è®¤å€¼ 0.125  
+		data_read_write_one cur_ki;					//ç”µæµçš„ Ki 							float 	4byte 	é»˜è®¤å€¼ 0.0158  
+		data_read_write_one cur_filt_gain;	//ç”µæµæ»¤æ³¢ç³»æ•°filt_gain 	float 	4byte 	0~1.0ï¼Œé»˜è®¤å€¼0.1  
+		data_read_write_one loc_ref;				//ä½ç½®æ¨¡å¼è§’åº¦æŒ‡ä»¤				float 	4byte 	rad  
+		data_read_write_one limit_spd;			//ä½ç½®æ¨¡å¼é€Ÿåº¦è®¾ç½®				float 	4byte 	0~30rad/s  
+		data_read_write_one limit_cur;			//é€Ÿåº¦ä½ç½®æ¨¡å¼ç”µæµè®¾ç½® 		float 	4byte 	0~23A
+		//ä»¥ä¸‹åªå¯è¯»
+		data_read_write_one mechPos;				//è´Ÿè½½ç«¯è®¡åœˆæœºæ¢°è§’åº¦			float 	4byte 	rad
+		data_read_write_one iqf;						//iq æ»¤æ³¢å€¼ 							float 	4byte 	-23~23A
+		data_read_write_one	mechVel;				//è´Ÿè½½ç«¯è½¬é€Ÿ							float 	4byte 	-30~30rad/s 	
+		data_read_write_one	VBUS;						//æ¯çº¿ç”µå‹								float 	4byte 	V	
+		data_read_write_one	rotation;				//åœˆæ•° 										int16 	2byte   åœˆæ•°
 		data_read_write(const uint16_t *index_list=Index_List);
 };
 typedef struct
@@ -72,7 +72,7 @@ typedef struct
 	float acceleration;
 	float Torque;
 	float Temp;
-	int pattern; //µç»úÄ£Ê½£¨0¸´Î»1±ê¶¨2ÔËĞĞ£©
+	int pattern; //ç”µæœºæ¨¡å¼ï¼ˆ0å¤ä½1æ ‡å®š2è¿è¡Œï¼‰
 }Motor_Pos_RobStrite_Info;
 typedef struct
 {
@@ -87,15 +87,15 @@ typedef struct
 	float set_Ki;
 	float set_Kd;
 }Motor_Set;
-//RobStrite_Motorµç»ú
+//RobStrite_Motorç”µæœº
 class RobStrite_Motor
 {
 private:		
-	uint8_t CAN_ID;						//CAN ID   (Ä¬ÈÏ127(0x7f) ¿ÉÒÔÍ¨¹ıÉÏÎ»»úºÍÍ¨ĞÅÀàĞÍ1²é¿´)
-	uint16_t Master_CAN_ID;		//Ö÷»úID  £¨»áÔÚ³õÊ¼»¯º¯ÊıÖĞÉè¶¨Îª0x1F£©
+	uint8_t CAN_ID;						//CAN ID   (é»˜è®¤127(0x7f) å¯ä»¥é€šè¿‡ä¸Šä½æœºå’Œé€šä¿¡ç±»å‹1æŸ¥çœ‹)
+	uint16_t Master_CAN_ID;		//ä¸»æœºID  ï¼ˆä¼šåœ¨åˆå§‹åŒ–å‡½æ•°ä¸­è®¾å®šä¸º0x1Fï¼‰
 	float (*Motor_Offset_MotoFunc)(float Motor_Tar);
 	FDCAN_HandleTypeDef *hfdcan;
-	Motor_Set Motor_Set_All;		//Éè¶¨Öµ
+	Motor_Set Motor_Set_All;		//è®¾å®šå€¼
 	uint8_t error_code;
 	int Rota_dir;
 	float ang_offset;
@@ -104,8 +104,8 @@ public:
 	uint8_t error_data[8];
 	float output;
 	int Can_Motor;
-	Motor_Pos_RobStrite_Info Pos_Info;		//»Ø´«Öµ
-	data_read_write drw;      						//µç»úÊı¾İ
+	Motor_Pos_RobStrite_Info Pos_Info;		//å›ä¼ å€¼
+	data_read_write drw;      						//ç”µæœºæ•°æ®
 	RobStrite_Motor(uint8_t CAN_Id,FDCAN_HandleTypeDef *hfdcan,int rotadir,float angle_offset);
 	RobStrite_Motor(float (*Offset_MotoFunc)(float Motor_Tar) , uint8_t CAN_Id);
 	void RobStrite_Get_CAN_ID();

@@ -70,8 +70,11 @@ void dbus_uart_init(void)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    rc_callback_handler(&rc,dbus_buf);
-	HAL_UART_Receive_DMA(&huart5,dbus_buf,DBUS_BUFLEN);
+	if(huart == &DBUS_HUART)
+	{
+		rc_callback_handler(&rc,dbus_buf);
+		HAL_UART_Receive_DMA(&huart5,dbus_buf,DBUS_BUFLEN);
+	}
 }
 
 

@@ -10,15 +10,15 @@ void get_total_angle(CAN_M3508_TypeDef *p) {
 
     int res1, res2;
     float delta;
-    if(p->angle < p->last_angle) {						//可能的情况
-        res1 = p->angle + 8192 - p->last_angle;			//正转，delta=+
-        res2 = p->angle - p->last_angle;				//反转	delta=-
+    if(p->angle < p->last_angle) {				
+        res1 = p->angle + 8192 - p->last_angle;		
+        res2 = p->angle - p->last_angle;		
     } 
 	else {	//angle > last
-        res1 = p->angle - 8192 - p->last_angle ;		//反转	delta -
-        res2 = p->angle - p->last_angle;				//正转	delta +
+        res1 = p->angle - 8192 - p->last_angle ;		
+        res2 = p->angle - p->last_angle;			
     }
-    //不管正反转，肯定是转的角度小的那个是真的
+  
     if(__fabs(res1)<__fabs(res2))
         delta = res1;
     else
@@ -31,15 +31,15 @@ void get_total_angle_2006(CAN_M2006_TypeDef *p) {
 
     int res1, res2;
     float delta;
-    if(p->angle < p->last_angle) {						//可能的情况
-        res1 = p->angle + 8192 - p->last_angle;			//正转，delta=+
-        res2 = p->angle - p->last_angle;				//反转	delta=-
+    if(p->angle < p->last_angle) {						
+        res1 = p->angle + 8192 - p->last_angle;			
+        res2 = p->angle - p->last_angle;				
     } 
 	else {	//angle > last
-        res1 = p->angle - 8192 - p->last_angle ;		//反转	delta -
-        res2 = p->angle - p->last_angle;				//正转	delta +
+        res1 = p->angle - 8192 - p->last_angle ;		
+        res2 = p->angle - p->last_angle;			
     }
-    //不管正反转，肯定是转的角度小的那个是真的
+   
     if(__fabs(res1)<__fabs(res2))
         delta = res1;
     else
@@ -52,15 +52,14 @@ void get_total_angle_6020(CAN_GM6020_TypeDef *p) {
 
     int res1, res2;
     float delta;
-    if(p->angle < p->last_angle) {						//可能的情况
-        res1 = p->angle + 8192 - p->last_angle;			//正转，delta=+
-        res2 = p->angle - p->last_angle;				//反转	delta=-
+    if(p->angle < p->last_angle) {						
+        res1 = p->angle + 8192 - p->last_angle;			
+        res2 = p->angle - p->last_angle;				
     } 
-	else {	//angle > last
-        res1 = p->angle - 8192 - p->last_angle ;		//反转	delta -
-        res2 = p->angle - p->last_angle;				//正转	delta +
+	else {	
+        res1 = p->angle - 8192 - p->last_angle ;	
+        res2 = p->angle - p->last_angle;				
     }
-    //不管正反转，肯定是转的角度小的那个是真的
     if(__fabs(res1)<__fabs(res2))
 	{
 		delta = res1;		

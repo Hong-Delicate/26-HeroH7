@@ -11,7 +11,13 @@
             "fdcan.h": "c",
             "chassis_task.h": "c",
             "main.h": "c",
-            "dm_motor_drv.h": "c"
+            "dm_motor_drv.h": "c",
+            "shoot_task.h": "c",
+            "gimbal_task.h": "c",
+            "outctl_task.h": "c",
+            "bsp_rc.h": "c",
+            "bsp_beep.h": "c",
+            "pid.h": "c"
         }
     },
     "extensions": {}

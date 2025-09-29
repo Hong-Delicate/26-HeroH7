@@ -24,8 +24,8 @@ PID_TypeDef PID_M3508[7];
 PID_TypeDef PID_M3508_speed[7];
 PID_TypeDef PID_M3508_Follow;
 PID_TypeDef PID_HEAT_PWM;
-PID_TypeDef PID_DM4310[1];
-PID_TypeDef PID_DM4310_speed[1];
+PID_TypeDef PID_DM4310;
+PID_TypeDef PID_DM4310_speed;
 
 
 void PID_Reset(PID_TypeDef	*pid, float kp, float ki, float kd)
@@ -36,7 +36,7 @@ void PID_Reset(PID_TypeDef	*pid, float kp, float ki, float kd)
 }
 
 void PID_Init(
-    PID_TypeDef*	pid,
+    PID_TypeDef*	    pid,
     uint32_t 			mode,
     uint32_t 			maxout,
     uint32_t 			intergral_limit,

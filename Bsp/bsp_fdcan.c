@@ -5,7 +5,7 @@
 * @brief:      	bsp_can_init(void)
 * @param:       void
 * @retval:     	void
-* @details:    	CAN Ê¹ÄÜ
+* @details:    	CAN ä½¿èƒ½
 ************************************************************************
 **/
 void bsp_can_init(void)
@@ -19,7 +19,7 @@ void FDCAN1_Config(void)
 {
 	FDCAN_FilterTypeDef sFilterConfig;
 	/* Configure Rx filter */	
-	sFilterConfig.IdType = FDCAN_STANDARD_ID;//À©Õ¹ID²»½ÓÊÕ
+	sFilterConfig.IdType = FDCAN_STANDARD_ID;//æ‰©å±•IDä¸æ¥æ”¶
 	sFilterConfig.FilterIndex = 0;
 	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
 	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
@@ -34,7 +34,7 @@ void FDCAN1_Config(void)
 		Error_Handler();
 	}
 
-	/* ¿ªÆôRX FIFO0µÄĞÂÊı¾İÖĞ¶Ï */
+	/* å¼€å¯RX FIFO0çš„æ–°æ•°æ®ä¸­æ–­ */
 	if (HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0) != HAL_OK)
 	{
 		Error_Handler();
@@ -55,7 +55,7 @@ void FDCAN2_Config(void)
 {
 	FDCAN_FilterTypeDef sFilterConfig;
 	/* Configure Rx filter */	
-	sFilterConfig.IdType = FDCAN_STANDARD_ID;//À©Õ¹ID²»½ÓÊÕ
+	sFilterConfig.IdType = FDCAN_STANDARD_ID;//æ‰©å±•IDä¸æ¥æ”¶
 	sFilterConfig.FilterIndex = 1;
 	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
 	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
@@ -69,7 +69,7 @@ void FDCAN2_Config(void)
 	{
 		Error_Handler();
 	}
-	/* ¿ªÆôRX FIFO0µÄĞÂÊı¾İÖĞ¶Ï */
+	/* å¼€å¯RX FIFO0çš„æ–°æ•°æ®ä¸­æ–­ */
 	if (HAL_FDCAN_ActivateNotification(&hfdcan2, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0) != HAL_OK)
 	{
 		Error_Handler();
@@ -89,7 +89,7 @@ void FDCAN3_Config(void)
 {
 	FDCAN_FilterTypeDef sFilterConfig;
 	/* Configure Rx filter */	
-	sFilterConfig.IdType = FDCAN_STANDARD_ID;//À©Õ¹ID²»½ÓÊÕ
+	sFilterConfig.IdType = FDCAN_STANDARD_ID;//æ‰©å±•IDä¸æ¥æ”¶
 	sFilterConfig.FilterIndex = 2;
 	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
 	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
@@ -104,7 +104,7 @@ void FDCAN3_Config(void)
 		Error_Handler();
 	}
 
-	/* ¿ªÆôRX FIFO0µÄĞÂÊı¾İÖĞ¶Ï */
+	/* å¼€å¯RX FIFO0çš„æ–°æ•°æ®ä¸­æ–­ */
 	if (HAL_FDCAN_ActivateNotification(&hfdcan3, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0) != HAL_OK)
 	{
 		Error_Handler();
@@ -122,12 +122,12 @@ void FDCAN3_Config(void)
 /**
 ************************************************************************
 * @brief:      	fdcanx_send_data(FDCAN_HandleTypeDef *hfdcan, uint16_t id, uint8_t *data, uint32_t len)
-* @param:       hfdcan£ºFDCAN¾ä±ú
-* @param:       id£ºCANÉè±¸ID
-* @param:       data£º·¢ËÍµÄÊı¾İ
-* @param:       len£º·¢ËÍµÄÊı¾İ³¤¶È
+* @param:       hfdcanï¼šFDCANå¥æŸ„
+* @param:       idï¼šCANè®¾å¤‡ID
+* @param:       dataï¼šå‘é€çš„æ•°æ®
+* @param:       lenï¼šå‘é€çš„æ•°æ®é•¿åº¦
 * @retval:     	void
-* @details:    	·¢ËÍÊı¾İ
+* @details:    	å‘é€æ•°æ®
 ************************************************************************
 **/
 uint8_t fdcanx_send_data(hcan_t *hfdcan, uint16_t id, uint8_t *data, uint32_t len)
@@ -158,18 +158,18 @@ uint8_t fdcanx_send_data(hcan_t *hfdcan, uint16_t id, uint8_t *data, uint32_t le
     pTxHeader.FDFormat=FDCAN_CLASSIC_CAN;
     pTxHeader.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
     pTxHeader.MessageMarker=0;
- 	while(HAL_FDCAN_GetTxFifoFreeLevel(hfdcan) == 0); // µÈ´ıÓĞ·¢ËÍÓÊÏä¿ÉÓÃ
+ 	while(HAL_FDCAN_GetTxFifoFreeLevel(hfdcan) == 0); // ç­‰å¾…æœ‰å‘é€é‚®ç®±å¯ç”¨
 	if(HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &pTxHeader, data)!=HAL_OK) 	
-		return 1;//·¢ËÍ
+		return 1;//å‘é€
 	return 0;	
 }
 /**
 ************************************************************************
 * @brief:      	fdcanx_receive(FDCAN_HandleTypeDef *hfdcan, uint8_t *buf)
-* @param:       hfdcan£ºFDCAN¾ä±ú
-* @param:       buf£º½ÓÊÕÊı¾İ»º´æ
-* @retval:     	½ÓÊÕµÄÊı¾İ³¤¶È
-* @details:    	½ÓÊÕÊı¾İ
+* @param:       hfdcanï¼šFDCANå¥æŸ„
+* @param:       bufï¼šæ¥æ”¶æ•°æ®ç¼“å­˜
+* @retval:     	æ¥æ”¶çš„æ•°æ®é•¿åº¦
+* @details:    	æ¥æ”¶æ•°æ®
 ************************************************************************
 **/
 
@@ -198,7 +198,7 @@ uint8_t fdcanx_receive(hcan_t *hfdcan, uint16_t *rec_id, uint8_t *buf)
 		else if(pRxHeader.DataLength<=FDCAN_DLC_BYTES_64)
 			len = 64;
 		
-		return len;//½ÓÊÕÊı¾İ
+		return len;//æ¥æ”¶æ•°æ®
 	}
 	return 0;	
 }
@@ -208,7 +208,7 @@ uint8_t fdcanx_receive(hcan_t *hfdcan, uint16_t *rec_id, uint8_t *buf)
 * @brief:      	fdcan1_rx_callback(void)
 * @param:       void
 * @retval:     	void
-* @details:    	CAN1½ÓÊÕ»Øµ÷
+* @details:    	CAN1æ¥æ”¶å›è°ƒ
 ************************************************************************
 **/
 void fdcan1_rx_callback(void)

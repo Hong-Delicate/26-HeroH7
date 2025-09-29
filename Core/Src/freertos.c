@@ -70,7 +70,31 @@ const osThreadAttr_t Chasis_Task_attributes = {
   .cb_size = sizeof(Chasis_TaskControlBlock),
   .stack_mem = &Chasis_TaskBuffer[0],
   .stack_size = sizeof(Chasis_TaskBuffer),
-  .priority = (osPriority_t) osPriorityHigh1,
+  .priority = (osPriority_t) osPriorityAboveNormal,
+};
+/* Definitions for Gimbal_Task */
+osThreadId_t Gimbal_TaskHandle;
+uint32_t Gimbal_TaskBuffer[ 512 ];
+osStaticThreadDef_t Gimbal_TaskControlBlock;
+const osThreadAttr_t Gimbal_Task_attributes = {
+  .name = "Gimbal_Task",
+  .cb_mem = &Gimbal_TaskControlBlock,
+  .cb_size = sizeof(Gimbal_TaskControlBlock),
+  .stack_mem = &Gimbal_TaskBuffer[0],
+  .stack_size = sizeof(Gimbal_TaskBuffer),
+  .priority = (osPriority_t) osPriorityAboveNormal,
+};
+/* Definitions for Shoot_Task */
+osThreadId_t Shoot_TaskHandle;
+uint32_t Shoot_TaskBuffer[ 512 ];
+osStaticThreadDef_t Shoot_TaskControlBlock;
+const osThreadAttr_t Shoot_Task_attributes = {
+  .name = "Shoot_Task",
+  .cb_mem = &Shoot_TaskControlBlock,
+  .cb_size = sizeof(Shoot_TaskControlBlock),
+  .stack_mem = &Shoot_TaskBuffer[0],
+  .stack_size = sizeof(Shoot_TaskBuffer),
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -80,6 +104,8 @@ const osThreadAttr_t Chasis_Task_attributes = {
 
 void StartDefaultTask(void *argument);
 extern void chassis_task(void *argument);
+extern void gimbal_task(void *argument);
+extern void shoot_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -115,6 +141,12 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of Chasis_Task */
   Chasis_TaskHandle = osThreadNew(chassis_task, NULL, &Chasis_Task_attributes);
+
+  /* creation of Gimbal_Task */
+  Gimbal_TaskHandle = osThreadNew(gimbal_task, NULL, &Gimbal_Task_attributes);
+
+  /* creation of Shoot_Task */
+  Shoot_TaskHandle = osThreadNew(shoot_task, NULL, &Shoot_Task_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

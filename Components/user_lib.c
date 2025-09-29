@@ -141,7 +141,7 @@ float float_deadband(float Value, float minValue, float maxValue)
     return Value;
 }
 
-//int26ËÀÇø
+//int16ËÀÇø
 int16_t int16_deadline(int16_t Value, int16_t minValue, int16_t maxValue)
 {
     if (Value < maxValue && Value > minValue)

@@ -6,6 +6,8 @@
 #define KD_MIN 0.0f
 #define KD_MAX 5.0f
 
+motor_t DM4310;
+
 /**
 ************************************************************************
 * @brief:      	dm4310_enable: 启用DM4310电机控制模式函数
@@ -504,6 +506,13 @@ void save_motor_data(uint16_t id, uint8_t rid)
 	
 	uint8_t data[4] = {can_id_l, can_id_h, 0xAA, 0x01};
 	fdcanx_send_data(&hfdcan1, 0x7FF, data, 4);
+}
+
+void dm_motor_init(motor_t *motor,uint16_t id,uint16_t mode)
+{
+  	motor->ctrl.mode =mode;
+  	motor->para.id=id;
+	motor->id=id;
 }
 
 #undef KP_MIN
