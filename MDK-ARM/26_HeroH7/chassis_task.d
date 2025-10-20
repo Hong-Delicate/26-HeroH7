@@ -38,6 +38,9 @@
 26_heroh7\chassis_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 26_heroh7\chassis_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 26_heroh7\chassis_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+26_heroh7\chassis_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h
+26_heroh7\chassis_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
+26_heroh7\chassis_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 26_heroh7\chassis_task.o: ../Bsp/bsp_beep.h
 26_heroh7\chassis_task.o: ../Core/Inc/main.h
 26_heroh7\chassis_task.o: ../Bsp/bsp_fdcan.h
@@ -46,3 +49,14 @@
 26_heroh7\chassis_task.o: ../Modules/dm_motor_drv.h
 26_heroh7\chassis_task.o: ../Bsp/bsp_rc.h
 26_heroh7\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+26_heroh7\chassis_task.o: ../USB_DEVICE/App/usbd_cdc_if.h
+26_heroh7\chassis_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
+26_heroh7\chassis_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+26_heroh7\chassis_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+26_heroh7\chassis_task.o: ../USB_DEVICE/Target/usbd_conf.h
+26_heroh7\chassis_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+26_heroh7\chassis_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+26_heroh7\chassis_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+26_heroh7\chassis_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
+26_heroh7\chassis_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+26_heroh7\chassis_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h

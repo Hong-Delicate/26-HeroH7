@@ -40,6 +40,9 @@
 26_heroh7\user_lib.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 26_heroh7\user_lib.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 26_heroh7\user_lib.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+26_heroh7\user_lib.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h
+26_heroh7\user_lib.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
+26_heroh7\user_lib.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 26_heroh7\user_lib.o: ../Bsp/bsp_beep.h
 26_heroh7\user_lib.o: ../Core/Inc/main.h
 26_heroh7\user_lib.o: ../Bsp/bsp_fdcan.h

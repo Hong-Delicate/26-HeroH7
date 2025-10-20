@@ -12,8 +12,6 @@ void shoot_task(void const *pvParameters)
 	PID_Init(&PID_DM4310_speed,POSITION_PID, 5, 1, 0.08, 0, 0.007, 0, 0); 
     
     dm_motor_init(&DM4310,1,mit_mode);
-    // dm_motor_enable(&hfdcan1,&DM4310);
-    // dm_motor_disable(&hfdcan1,&DM4310);
     while (1)
     {
         dm_motor_enable(&hfdcan1,&DM4310);
@@ -35,9 +33,11 @@ void shoot_task(void const *pvParameters)
         // }
         // else
         // {
-        //     DM4310.set.tor = DM4310.set.vel = 0;
+        //      DM4310.ctrl.tor_set =  0 ;
+        //      DM4310.ctrl.vel_set =  0 ;
         // }
-         DM4310.para.tor = DM4310.para.vel = 1;
+         DM4310.ctrl.tor_set =  1;
+		 DM4310.ctrl.vel_set =	0.5;
          dm_motor_ctrl_send(&hfdcan1,&DM4310);
 
         osDelayUntil(previousWakeTime + SHOOT_CONTROL_TIME_MS);

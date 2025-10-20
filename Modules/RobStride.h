@@ -1,24 +1,17 @@
 #ifndef __ROBSTRITE_H__
 #define __ROBSTRITE_H__
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
-#ifdef __cplusplus
- }
-#endif
 #include "main.h"
 #include "fdcan.h"
  
- #define Set_mode 		 'j'				//设置控制模式
- #define Set_parameter 'p'				//设置参数
+ #define Set_mode 		'j'				//设置控制模式
+ #define Set_parameter 	'p'				//设置参数
  //各种控制模式
  #define move_control_mode  0	//运控模式
  #define Pos_control_mode   1	//位置模式
- #define Speed_control_mode 2 //速度模式
- #define Elect_control_mode 3 //电流模式
- #define Set_Zero_mode      4 //零点模式
+ #define Speed_control_mode 2 	//速度模式
+ #define Elect_control_mode 3	//电流模式
+ #define Set_Zero_mode      4 	//零点模式
  //通信地址
 #define Communication_Type_Get_ID 0x00     					//获取设备的ID和64位MCU唯一标识符`
 #define Communication_Type_MotionControl 0x01 			//运控模式用来向主机发送控制指令
@@ -33,7 +26,6 @@
 #define Communication_Type_ErrorFeedback 0x15				//故障反馈帧
 
 #ifdef __cplusplus
-
 class data_read_write_one
 {
 	public:
@@ -87,7 +79,14 @@ typedef struct
 	float set_Ki;
 	float set_Kd;
 }Motor_Set;
-//RobStrite_Motor电机
+
+enum MIT_TYPE
+{
+    operationControl = 0,
+    positionControl = 1,
+    speedControl = 2
+};
+
 class RobStrite_Motor
 {
 private:		
@@ -97,8 +96,7 @@ private:
 	FDCAN_HandleTypeDef *hfdcan;
 	Motor_Set Motor_Set_All;		//设定值
 	uint8_t error_code;
-	int Rota_dir;
-	float ang_offset;
+
 public:
 	uint32_t error_cnt;
 	uint8_t error_data[8];
@@ -106,7 +104,7 @@ public:
 	int Can_Motor;
 	Motor_Pos_RobStrite_Info Pos_Info;		//回传值
 	data_read_write drw;      						//电机数据
-	RobStrite_Motor(uint8_t CAN_Id,FDCAN_HandleTypeDef *hfdcan,int rotadir,float angle_offset);
+	RobStrite_Motor(uint8_t CAN_Id,FDCAN_HandleTypeDef *hfdcan);
 	RobStrite_Motor(float (*Offset_MotoFunc)(float Motor_Tar) , uint8_t CAN_Id);
 	void RobStrite_Get_CAN_ID();
 	void Set_RobStrite_Motor_parameter(uint16_t Index, float Value, char Value_mode);
@@ -124,7 +122,7 @@ public:
 
 };
 void SearchMotor(FDCAN_HandleTypeDef *hfdcan,uint8_t CAN_ID);
-extern RobStrite_Motor RobStrite03[];
+extern RobStrite_Motor RobStrite00;
 
 
 #endif

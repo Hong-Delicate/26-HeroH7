@@ -37,6 +37,9 @@
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h
+26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
+26_heroh7\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 26_heroh7\main.o: ../Bsp/bsp_beep.h
 26_heroh7\main.o: ../Core/Inc/main.h
 26_heroh7\main.o: ../Bsp/bsp_fdcan.h
@@ -57,4 +60,10 @@
 26_heroh7\main.o: ../Core/Inc/dma.h
 26_heroh7\main.o: ../Core/Inc/tim.h
 26_heroh7\main.o: ../Core/Inc/usart.h
+26_heroh7\main.o: ../USB_DEVICE/App/usb_device.h
+26_heroh7\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+26_heroh7\main.o: ../USB_DEVICE/Target/usbd_conf.h
+26_heroh7\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+26_heroh7\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+26_heroh7\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 26_heroh7\main.o: ../Core/Inc/gpio.h

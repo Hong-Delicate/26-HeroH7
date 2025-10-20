@@ -5,6 +5,9 @@
 #define KP_MAX 500.0f
 #define KD_MIN 0.0f
 #define KD_MAX 5.0f
+#define PMAX 12.56f
+#define VMAX 30
+#define TMAX 10
 
 motor_t DM4310;
 
@@ -156,9 +159,9 @@ void dm_motor_fbdata(motor_t *motor, uint8_t *rx_data)
 	motor->para.p_int=(rx_data[1]<<8)|rx_data[2];
 	motor->para.v_int=(rx_data[3]<<4)|(rx_data[4]>>4);
 	motor->para.t_int=((rx_data[4]&0xF)<<8)|rx_data[5];
-	motor->para.pos = uint_to_float(motor->para.p_int, -motor->tmp.PMAX, motor->tmp.PMAX, 16); // (-12.5,12.5)
-	motor->para.vel = uint_to_float(motor->para.v_int, -motor->tmp.VMAX, motor->tmp.VMAX, 12); // (-45.0,45.0)
-	motor->para.tor = uint_to_float(motor->para.t_int, -motor->tmp.TMAX, motor->tmp.TMAX, 12); // (-18.0,18.0)
+	motor->para.pos = uint_to_float(motor->para.p_int, -PMAX, PMAX, 16); // (-12.56,12.56)
+	motor->para.vel = uint_to_float(motor->para.v_int, -VMAX, VMAX, 12); // (-30.0,30.0)
+	motor->para.tor = uint_to_float(motor->para.t_int, -TMAX, TMAX, 12); // (-10.0,10.0)
 	motor->para.Tmos = (float)(rx_data[6]);
 	motor->para.Tcoil = (float)(rx_data[7]);
 }
@@ -324,9 +327,9 @@ void mit_ctrl(hcan_t* hcan, motor_t *motor, uint16_t motor_id, float pos, float 
 	uint16_t pos_tmp,vel_tmp,kp_tmp,kd_tmp,tor_tmp;
 	uint16_t id = motor_id + MIT_MODE;
 
-	pos_tmp = float_to_uint(pos, -motor->tmp.PMAX, motor->tmp.PMAX, 16);
-	vel_tmp = float_to_uint(vel, -motor->tmp.VMAX, motor->tmp.VMAX, 12);
-	tor_tmp = float_to_uint(tor, -motor->tmp.TMAX, motor->tmp.TMAX, 12);
+	pos_tmp = float_to_uint(pos, -PMAX, PMAX, 16);
+	vel_tmp = float_to_uint(vel, -VMAX, VMAX, 12);
+	tor_tmp = float_to_uint(tor, -TMAX, TMAX, 12);
 	kp_tmp  = float_to_uint(kp,  KP_MIN, KP_MAX, 12);
 	kd_tmp  = float_to_uint(kd,  KD_MIN, KD_MAX, 12);
 
@@ -439,74 +442,6 @@ void psi_ctrl(hcan_t* hcan, uint16_t motor_id, float pos, float vel, float cur)
 	
 	fdcanx_send_data(hcan, id, data, 8);
 }
-/**
-************************************************************************
-* @brief:      	read_motor_data: 发送读取寄存器命令
-* @param[in]:   id:    电机can id
-* @param[in]:   rid:   寄存器地址
-* @retval:     	void
-* @details:    	读取电机参数
-************************************************************************
-**/
-void read_motor_data(uint16_t id, uint8_t rid) 
-{
-	uint8_t can_id_l = id & 0x0F;
-	uint8_t can_id_h = (id >> 4) & 0x0F;
-	
-	uint8_t data[4] = {can_id_l, can_id_h, 0x33, rid};
-	fdcanx_send_data(&hfdcan1, 0x7FF, data, 4);
-}
-/**
-************************************************************************
-* @brief:      	read_motor_ctrl_fbdata: 发送读取电机反馈数据的命令
-* @param[in]:   id:    电机can id
-* @retval:     	void
-* @details:    	读取电机控制反馈的数据
-************************************************************************
-**/
-void read_motor_ctrl_fbdata(uint16_t id) 
-{
-	uint8_t can_id_l = id & 0xFF;       // 低 8 位
-    uint8_t can_id_h = (id >> 8) & 0x07; // 高 3 位
-
-	uint8_t data[4] = {can_id_l, can_id_h, 0xCC, 0x00};
-	fdcanx_send_data(&hfdcan1, 0x7FF, data, 4);
-}
-/**
-************************************************************************
-* @brief:      	write_motor_data: 发送写寄存器命令
-* @param[in]:   id:    电机can id
-* @param[in]:   rid:   寄存器地址
-* @param[in]:   d0-d3: 写入的数据
-* @retval:     	void
-* @details:    	向寄存器写入数据
-************************************************************************
-**/
-void write_motor_data(uint16_t id, uint8_t rid, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
-{
-	uint8_t can_id_l = id & 0xFF;       // 低 8 位
-    uint8_t can_id_h = (id >> 8) & 0x07; // 高 3 位
-	
-	uint8_t data[8] = {can_id_l, can_id_h, 0x55, rid, d0, d1, d2, d3};
-	fdcanx_send_data(&hfdcan1, 0x7FF, data, 8);
-}
-/**
-************************************************************************
-* @brief:      	save_motor_data: 发送保存命令
-* @param[in]:   id:    电机can id
-* @param[in]:   rid:   寄存器地址
-* @retval:     	void
-* @details:    	保存写入的电机参数
-************************************************************************
-**/
-void save_motor_data(uint16_t id, uint8_t rid) 
-{
-	uint8_t can_id_l = id & 0xFF;       // 低 8 位
-    uint8_t can_id_h = (id >> 8) & 0x07; // 高 3 位
-	
-	uint8_t data[4] = {can_id_l, can_id_h, 0xAA, 0x01};
-	fdcanx_send_data(&hfdcan1, 0x7FF, data, 4);
-}
 
 void dm_motor_init(motor_t *motor,uint16_t id,uint16_t mode)
 {
@@ -519,3 +454,6 @@ void dm_motor_init(motor_t *motor,uint16_t id,uint16_t mode)
 #undef KP_MAX
 #undef KD_MIN
 #undef KD_MAX
+#undef PMAX
+#undef VMAX
+#undef TMAX

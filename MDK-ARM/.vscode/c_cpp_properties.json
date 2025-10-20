@@ -15,11 +15,17 @@
                 "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Modules",
                 "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Task",
                 "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Components",
+                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\USB_DEVICE\\App",
+                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\USB_DEVICE\\Target",
+                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Middlewares\\ST\\STM32_USB_Device_Library\\Core\\Inc",
+                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Middlewares\\ST\\STM32_USB_Device_Library\\Class\\CDC\\Inc",
                 "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\MDK-ARM",
                 "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Core\\Src",
                 "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Drivers\\STM32H7xx_HAL_Driver\\Src",
                 "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Middlewares\\Third_Party\\FreeRTOS\\Source",
-                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang"
+                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang",
+                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Middlewares\\ST\\STM32_USB_Device_Library\\Core\\Src",
+                "e:\\Users\\32279\\Desktop\\diankong2026\\26-HeroH7\\Middlewares\\ST\\STM32_USB_Device_Library\\Class\\CDC\\Src"
             ],
             "defines": [
                 "USE_PWR_LDO_SUPPLY",

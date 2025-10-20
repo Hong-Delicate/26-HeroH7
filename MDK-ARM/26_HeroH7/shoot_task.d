@@ -38,6 +38,9 @@
 26_heroh7\shoot_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 26_heroh7\shoot_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 26_heroh7\shoot_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+26_heroh7\shoot_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h
+26_heroh7\shoot_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
+26_heroh7\shoot_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 26_heroh7\shoot_task.o: ../Bsp/bsp_beep.h
 26_heroh7\shoot_task.o: ../Core/Inc/main.h
 26_heroh7\shoot_task.o: ../Bsp/bsp_fdcan.h
@@ -47,4 +50,4 @@
 26_heroh7\shoot_task.o: ..\Task\outctl_task.h
 26_heroh7\shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 26_heroh7\shoot_task.o: ../Bsp/bsp_rc.h
-26_heroh7\shoot_task.o: ..\Components\pid.h
+26_heroh7\shoot_task.o: ../Components/pid.h

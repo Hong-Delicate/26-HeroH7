@@ -29,6 +29,16 @@ void FDCAN1_Config(void)
 	{
 		Error_Handler();
 	}
+	sFilterConfig.IdType = FDCAN_EXTENDED_ID;//接收扩展ID
+	sFilterConfig.FilterIndex = 3;
+	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
+	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO1;
+	sFilterConfig.FilterID1 = 0x00000000; // 
+	sFilterConfig.FilterID2 = 0x00000000; // 
+ 	if(HAL_FDCAN_ConfigFilter(&hfdcan1, &sFilterConfig) != HAL_OK)
+	{
+		Error_Handler();
+	}
 	if (HAL_FDCAN_ConfigGlobalFilter(&hfdcan1, FDCAN_REJECT, FDCAN_REJECT, FDCAN_FILTER_REMOTE, FDCAN_FILTER_REMOTE) != HAL_OK)
 	{
 		Error_Handler();
@@ -39,12 +49,13 @@ void FDCAN1_Config(void)
 	{
 		Error_Handler();
 	}
+	/* 开启RX FIFO1的新数据中断 */
 	if (HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
 	{
 		Error_Handler();
 	}
 
-	/* Start the FDCAN module */
+	/* 开启CAN通信 */
 	if (HAL_FDCAN_Start(&hfdcan1) != HAL_OK)
 	{
 		Error_Handler();
@@ -65,6 +76,16 @@ void FDCAN2_Config(void)
 	{
 		Error_Handler();
 	}
+	sFilterConfig.IdType = FDCAN_EXTENDED_ID;//接收扩展ID
+	sFilterConfig.FilterIndex = 4;
+	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
+	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO1;
+	sFilterConfig.FilterID1 = 0x00000000; // 
+	sFilterConfig.FilterID2 = 0x00000000; // 
+ 	if(HAL_FDCAN_ConfigFilter(&hfdcan2, &sFilterConfig) != HAL_OK)
+	{
+		Error_Handler();
+	}
 	if (HAL_FDCAN_ConfigGlobalFilter(&hfdcan2, FDCAN_REJECT, FDCAN_REJECT, FDCAN_FILTER_REMOTE, FDCAN_FILTER_REMOTE) != HAL_OK)
 	{
 		Error_Handler();
@@ -74,11 +95,13 @@ void FDCAN2_Config(void)
 	{
 		Error_Handler();
 	}
+	/* 开启RX FIFO1的新数据中断 */
 	if (HAL_FDCAN_ActivateNotification(&hfdcan2, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
 	{
 		Error_Handler();
 	}
-	/* Start the FDCAN module */
+
+	/* 开启CAN通信 */
 	if (HAL_FDCAN_Start(&hfdcan2) != HAL_OK)
 	{
 		Error_Handler();
@@ -99,6 +122,17 @@ void FDCAN3_Config(void)
 	{
 		Error_Handler();
 	}
+	sFilterConfig.IdType = FDCAN_EXTENDED_ID;//接收扩展ID
+	sFilterConfig.FilterIndex = 5;
+	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
+	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO1;
+	sFilterConfig.FilterID1 = 0x00000000; // 
+	sFilterConfig.FilterID2 = 0x00000000; // 
+ 	if(HAL_FDCAN_ConfigFilter(&hfdcan3, &sFilterConfig) != HAL_OK)
+	{
+		Error_Handler();
+	}
+
 	if (HAL_FDCAN_ConfigGlobalFilter(&hfdcan3, FDCAN_REJECT, FDCAN_REJECT, FDCAN_FILTER_REMOTE, FDCAN_FILTER_REMOTE) != HAL_OK)
 	{
 		Error_Handler();
@@ -109,11 +143,13 @@ void FDCAN3_Config(void)
 	{
 		Error_Handler();
 	}
+	/* 开启RX FIFO1的新数据中断 */
 	if (HAL_FDCAN_ActivateNotification(&hfdcan3, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
 	{
 		Error_Handler();
 	}
-	/* Start the FDCAN module */
+
+	/* 开启CAN通信 */
 	if (HAL_FDCAN_Start(&hfdcan3) != HAL_OK)
 	{
 		Error_Handler();
@@ -216,12 +252,9 @@ void fdcan1_rx_callback(void)
 	uint16_t rec_id;
 	uint8_t rx_data[8];
 	fdcanx_receive(&hfdcan1, &rec_id,(uint8_t *)rx_data);
-	if(rec_id == 0x201)
+	if(rec_id == 0x00)
 	{
-		CAN_M3508[0].angle=(rx_data[0]<<8)+rx_data[1];
-		CAN_M3508[0].speed=(rx_data[2]<<8)+rx_data[3];
-		CAN_M3508[0].current=(rx_data[4]<<8)+rx_data[5];
-		CAN_M3508[0].temperature=(rx_data[6]<<8);
+		dm_motor_fbdata(&DM4310,rx_data);
 	}
 }
 

@@ -6,6 +6,7 @@ CAN_GM6020_TypeDef 	CAN_GM6020[6];
 CAN_M2006_TypeDef 	CAN_M2006[1];
 CAN_M3508_TypeDef 	CAN_M3508[6];
 
+
 void get_total_angle(CAN_M3508_TypeDef *p) {
 
     int res1, res2;
