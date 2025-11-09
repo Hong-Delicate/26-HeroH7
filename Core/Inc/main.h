@@ -33,7 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "bsp_beep.h"
 #include "bsp_fdcan.h"
-
+#include "bsp_rc.h"
 #include "Djimotor.h"
 #include "dm_motor_drv.h"
 

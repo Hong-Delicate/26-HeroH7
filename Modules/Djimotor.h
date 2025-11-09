@@ -6,53 +6,44 @@
 #endif
 
 typedef struct {
-    int16_t  	set_current;	
-		float set_speed;  
-    uint16_t 	angle;	
-	  int16_t  	last_angle;
-	  float 		total_angle;
-    int16_t 	speed;		
-    int16_t		current;		
-    uint8_t 	temperature;
+    int16_t  	set_current;	//设定输出电流  (16384 -> 20A)
+	float       set_speed;      //设定输出转速  (RPM)
+    uint16_t 	angle;	        //反馈角度  (8192 -> 360°)
+	int16_t  	last_angle;     //上一时刻反馈角度  (8192 -> 360°)
+	float 		total_angle;    //上电后总转角      (8192 -> 360°)
+    int16_t 	speed;		    //反馈速度  (RPM)
+    int16_t		current;		//反馈电流  (16384 -> 20A)
+    uint8_t 	temperature;    //反馈温度  (℃)
 } CAN_M3508_TypeDef;
 
 
 
 typedef struct
 {
-    int16_t  set_voltage;
-    float set_angle_speed;
-    int16_t angle;			
-    int16_t  	last_angle;
-    float 		total_angle;
-    int16_t  speed;     
-    int16_t  current;       
-    int8_t  temperature;  
+    int16_t  	set_voltage;	//设定输出电流  (16384 -> 20A)
+	float       set_speed;      //设定输出转速  (RPM)
+    uint16_t 	set_angle;      //设定转角  (8192 -> 360°)
+    uint16_t    init_angle;     //初始转角  (8192 -> 360°)
+    uint16_t 	angle;	        //反馈角度  (8192 -> 360°)
+	int16_t  	last_angle;     //上一时刻反馈角度  (8192 -> 360°)
+	float 		total_angle;    //上电后总转角      (8192 -> 360°)
+    int16_t 	speed;		    //反馈速度  (RPM)
+    int16_t		current;		//反馈电流  (16384 -> 20A)
+    uint8_t 	temperature;    //反馈温度  (℃)
 } CAN_GM6020_TypeDef;
 
 
 typedef struct
 {
-    int16_t  set_current;	
-    uint16_t angle;		
-    int16_t  	last_angle;
-    float 		total_angle;
-    int16_t  speed;      
-    int16_t  current;    
-    uint8_t  temperature;  
+    int16_t  	set_current;	//设定输出电流  (16384 -> 20A)
+	float       set_speed;      //设定输出转速  (RPM)
+    uint16_t 	angle;	        //反馈角度  (8192 -> 360°)
+	int16_t  	last_angle;     //上一时刻反馈角度  (8192 -> 360°)
+	float 		total_angle;    //上电后总转角      (8192 -> 360°)
+    int16_t 	speed;		    //反馈速度  (RPM)
+    int16_t		current;		//反馈电流  (16384 -> 20A)
+    uint8_t 	temperature;    //反馈温度  (℃)
 } CAN_M2006_TypeDef;
-
-
-#define	CAN1_M3508_ID1 0x201	  
-#define	CAN1_M3508_ID2 0x202	
-#define	CAN1_M3508_ID3 0x203
-#define	CAN1_M3508_ID4 0x204	
-#define CAN1_GM6020_ID1  0x205	           
-
-#define CAN2_GM6020_ID1  0x205	
-#define	CAN2_M3508_ID2  0x202	
-#define	CAN2_M3508_ID3  0x203	
-#define CAN2_M2006_ID1  0x201	
 
 
 extern CAN_GM6020_TypeDef 	CAN_GM6020[];	

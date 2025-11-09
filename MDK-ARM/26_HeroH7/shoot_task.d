@@ -45,9 +45,9 @@
 26_heroh7\shoot_task.o: ../Core/Inc/main.h
 26_heroh7\shoot_task.o: ../Bsp/bsp_fdcan.h
 26_heroh7\shoot_task.o: ../Core/Inc/fdcan.h
+26_heroh7\shoot_task.o: ../Bsp/bsp_rc.h
 26_heroh7\shoot_task.o: ../Modules/Djimotor.h
 26_heroh7\shoot_task.o: ../Modules/dm_motor_drv.h
 26_heroh7\shoot_task.o: ..\Task\outctl_task.h
 26_heroh7\shoot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
-26_heroh7\shoot_task.o: ../Bsp/bsp_rc.h
 26_heroh7\shoot_task.o: ../Components/pid.h

@@ -2,9 +2,9 @@
 #define __fabs(v)  v > 0 ? v:-v 
 uint32_t CAN2_CNT = 0;
 
-CAN_GM6020_TypeDef 	CAN_GM6020[6];	
-CAN_M2006_TypeDef 	CAN_M2006[1];
-CAN_M3508_TypeDef 	CAN_M3508[6];
+CAN_GM6020_TypeDef 	CAN_GM6020[4];	
+CAN_M2006_TypeDef 	CAN_M2006[2];
+CAN_M3508_TypeDef 	CAN_M3508[10];
 
 
 void get_total_angle(CAN_M3508_TypeDef *p) {

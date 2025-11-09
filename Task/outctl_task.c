@@ -1,11 +1,11 @@
 #include "outctl_task.h"
 
-uint8_t rc_flag=0,rc_out_time=20;  //numº«¬º¿Îœﬂ ±º‰
-uint8_t vision_flag=0,vision_out_time=20;  //numº«¬º¿Îœﬂ ±º‰
+uint8_t rc_flag=0,rc_out_time=20;  //ËÆ∞ÂΩïÈÅ•ÊéßÂô®Á¶ªÁ∫øÊó∂Èó¥
+uint8_t vision_flag=0,vision_out_time=20;  //ËÆ∞ÂΩïËßÜËßâ‰∏≤Âè£Á¶ªÁ∫øÊó∂Èó¥
 
 void outctl_task(void const *pvParameters)
 {
-    //ø’œ–“ª∂Œ ±º‰
+
     osDelay(OUTCTL_TASK_INIT_TIME);
     uint32_t previousWakeTime = osKernelGetTickCount();
 
@@ -21,7 +21,6 @@ void outctl_task(void const *pvParameters)
 				if(vision_out_time>10) vision_flag=0;
 			  else vision_flag=1;
 			  
-        //œµÕ≥œ‡∂‘—” ±
         osDelayUntil(previousWakeTime + OUTCTL_TASK_TIME_MS);
     }
 }

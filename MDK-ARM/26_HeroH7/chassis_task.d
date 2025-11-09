@@ -45,9 +45,9 @@
 26_heroh7\chassis_task.o: ../Core/Inc/main.h
 26_heroh7\chassis_task.o: ../Bsp/bsp_fdcan.h
 26_heroh7\chassis_task.o: ../Core/Inc/fdcan.h
+26_heroh7\chassis_task.o: ../Bsp/bsp_rc.h
 26_heroh7\chassis_task.o: ../Modules/Djimotor.h
 26_heroh7\chassis_task.o: ../Modules/dm_motor_drv.h
-26_heroh7\chassis_task.o: ../Bsp/bsp_rc.h
 26_heroh7\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 26_heroh7\chassis_task.o: ../USB_DEVICE/App/usbd_cdc_if.h
 26_heroh7\chassis_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h

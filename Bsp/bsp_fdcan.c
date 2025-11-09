@@ -1,4 +1,7 @@
 #include "bsp_fdcan.h"
+#include "Djimotor.h"
+#include "dm_motor_drv.h"
+#include "RobStride.h"
 
 /**
 ************************************************************************
@@ -252,35 +255,52 @@ void fdcan1_rx_callback(void)
 	uint16_t rec_id;
 	uint8_t rx_data[8];
 	fdcanx_receive(&hfdcan1, &rec_id,(uint8_t *)rx_data);
-	if(rec_id == 0x00)
+	if(rec_id>=0x201 && rec_id<=0x204)	//底盘轮毂电机反馈数据
 	{
-		dm_motor_fbdata(&DM4310,rx_data);
+		CAN_M3508[rec_id-0x201].angle=(rx_data[0]<<8)+rx_data[1];
+		CAN_M3508[rec_id-0x201].speed=(rx_data[2]<<8)+rx_data[3];
+		CAN_M3508[rec_id-0x201].current=(rx_data[4]<<8)+rx_data[5];
+		CAN_M3508[rec_id-0x201].temperature=(rx_data[6]<<8);
 	}
+	// if(rec_id == 0x00)	//底盘DM4310电机反馈数据
+	// {
+	// 	dm_motor_fbdata(&DM4310,rx_data);
+	// }
+
 }
 
+/**
+************************************************************************
+* @brief:      	fdcan2_rx_callback(void)
+* @param:       void
+* @retval:     	void
+* @details:    	CAN2接收回调
+************************************************************************
+**/
 void fdcan2_rx_callback(void){
 	uint16_t rec_id;
 	uint8_t rx_data[8];
 	fdcanx_receive(&hfdcan2, &rec_id,(uint8_t *)rx_data);
-	if(rec_id == 0x201)
+	if(rec_id>=0x205 && rec_id<=0x208)	//底盘轮毂电机反馈数据
 	{
-		CAN_M3508[0].angle=(rx_data[0]<<8)+rx_data[1];
-		CAN_M3508[0].speed=(rx_data[2]<<8)+rx_data[3];
-		CAN_M3508[0].current=(rx_data[4]<<8)+rx_data[5];
-		CAN_M3508[0].temperature=(rx_data[6]<<8);
+		CAN_GM6020[rec_id-0x205].angle=(rx_data[0]<<8)+rx_data[1];
+		CAN_GM6020[rec_id-0x205].speed=(rx_data[2]<<8)+rx_data[3];
+		CAN_GM6020[rec_id-0x205].current=(rx_data[4]<<8)+rx_data[5];
+		CAN_GM6020[rec_id-0x205].temperature=(rx_data[6]<<8);
 	}
 }
+/**
+************************************************************************
+* @brief:      	fdcan3_rx_callback(void)
+* @param:       void
+* @retval:     	void
+* @details:    	CAN3接收回调
+************************************************************************
+**/
 void fdcan3_rx_callback(void){
 	uint16_t rec_id;
 	uint8_t rx_data[8];
 	fdcanx_receive(&hfdcan3, &rec_id,(uint8_t *)rx_data);
-	if(rec_id == 0x201)
-	{
-		CAN_M3508[0].angle=(rx_data[0]<<8)+rx_data[1];
-		CAN_M3508[0].speed=(rx_data[2]<<8)+rx_data[3];
-		CAN_M3508[0].current=(rx_data[4]<<8)+rx_data[5];
-		CAN_M3508[0].temperature=(rx_data[6]<<8);
-	}
 }
 
 
@@ -318,3 +338,40 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
 		}
 	}
 }
+
+void CAN_Chassis_Velocity_SendCurrent(void) //底盘轮毂电机电流控制发送函数
+{
+    uint8_t data[8];
+
+    data[0] = CAN_M3508[0].set_current >> 8; 
+    data[1] = CAN_M3508[0].set_current;
+    data[2] = CAN_M3508[1].set_current >> 8; 
+    data[3] = CAN_M3508[1].set_current;
+	
+    data[4] = CAN_M3508[2].set_current >> 8;
+    data[5] = CAN_M3508[2].set_current;
+    data[6] = CAN_M3508[3].set_current >> 8; 
+    data[7] = CAN_M3508[3].set_current;
+
+    fdcanx_send_data(&hfdcan1,0x200,data,8);
+}
+
+void CAN_Chassis_Orientation_SendVoltage(void) //底盘轮毂电机角度控制发送函数
+
+{	
+	uint8_t data[8];
+	
+	data[0] = CAN_GM6020[0].set_voltage >> 8;
+    data[1] = CAN_GM6020[0].set_voltage;	
+    data[2] = CAN_GM6020[1].set_voltage >> 8;
+    data[3] = CAN_GM6020[1].set_voltage;	
+	
+    data[4] = CAN_GM6020[2].set_voltage >> 8;
+    data[5] = CAN_GM6020[2].set_voltage;	
+    data[6] = CAN_GM6020[3].set_voltage >> 8;
+    data[7] = CAN_GM6020[3].set_voltage;	
+	
+    fdcanx_send_data(&hfdcan2,0x1FF,data,8);
+	
+}
+

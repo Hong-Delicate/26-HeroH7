@@ -95,8 +95,8 @@ uint8_t UserRxBufferHS[APP_RX_DATA_SIZE];
 uint8_t UserTxBufferHS[APP_TX_DATA_SIZE];
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
-uint8_t  myUSBRxData[64] = { 0 };   // ½ÓÊÕµ½µÄÊý¾Ý
-uint16_t myUSBRxNum = 0;            // ½ÓÊÕµ½µÄ×Ö½ÚÊý
+uint8_t  myUSBRxData[64] = { 0 };   // ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+uint16_t myUSBRxNum = 0;            // ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½
 
 /* USER CODE END PRIVATE_VARIABLES */
 
@@ -267,10 +267,10 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 11 */
 	
-    memset(myUSBRxData, 0, 64);                     // Çå0»º´æÇø 
-    memcpy(myUSBRxData, Buf, *Len);                 // °Ñ½ÓÊÕµ½µÄÊý¾Ý£¬¸´ÖÆµ½×Ô¼ºµÄ»º´æÇøÖÐ
-    myUSBRxNum = *Len;                              // ¸´ÖÆ×Ö½ÚÊý    
-    memset(Buf, 0, 64);                             // ´¦ÀíÍêÊý¾Ý£¬Çå0½ÓÊÕ»º´æ;  
+    memset(myUSBRxData, 0, 64);                     // ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+    memcpy(myUSBRxData, Buf, *Len);                 // ï¿½Ñ½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½Ô¼ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    myUSBRxNum = *Len;                              // ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½    
+    memset(Buf, 0, 64);                             // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½;  
   USBD_CDC_SetRxBuffer(&hUsbDeviceHS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceHS);
   return (USBD_OK);

@@ -45,6 +45,7 @@
 26_heroh7\pid.o: ../Core/Inc/main.h
 26_heroh7\pid.o: ../Bsp/bsp_fdcan.h
 26_heroh7\pid.o: ../Core/Inc/fdcan.h
+26_heroh7\pid.o: ../Bsp/bsp_rc.h
 26_heroh7\pid.o: ../Modules/Djimotor.h
 26_heroh7\pid.o: ../Modules/dm_motor_drv.h
 26_heroh7\pid.o: ..\Components\user_lib.h

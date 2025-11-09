@@ -19,6 +19,8 @@ void fdcan1_rx_callback(void);
 void fdcan2_rx_callback(void);
 void fdcan3_rx_callback(void);
 
+void CAN_Chassis_Velocity_SendCurrent(void);
+void CAN_Chassis_Orientation_SendVoltage(void);
 
 
 #ifdef  __cplusplus

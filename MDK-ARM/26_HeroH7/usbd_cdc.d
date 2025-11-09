@@ -51,6 +51,7 @@
 26_heroh7\usbd_cdc.o: ../Core/Inc/main.h
 26_heroh7\usbd_cdc.o: ../Bsp/bsp_fdcan.h
 26_heroh7\usbd_cdc.o: ../Core/Inc/fdcan.h
+26_heroh7\usbd_cdc.o: ../Bsp/bsp_rc.h
 26_heroh7\usbd_cdc.o: ../Modules/Djimotor.h
 26_heroh7\usbd_cdc.o: ../Modules/dm_motor_drv.h
 26_heroh7\usbd_cdc.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
